@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f6f4ec;
+  --foreground: #17251f;
+  --card: #ffffff;
+  --gold: #c9a227;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-tajawal);
+}
+
+body {
+  background:
+    radial-gradient(1200px 500px at 100% -10%, rgba(16, 122, 87, 0.08), transparent),
+    radial-gradient(900px 400px at 0% 0%, rgba(201, 162, 39, 0.08), transparent),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-tajawal), system-ui, "Segoe UI", sans-serif;
+}
+
+/* خط النصوص القرآنية والأذكار */
+.font-quran {
+  font-family: var(--font-amiri), "Amiri", serif;
+  line-height: 2.1;
+}
+
+/* شريط تقدّم ناعم */
+.progress-track {
+  background: rgba(16, 122, 87, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  background: linear-gradient(90deg, #0f9d70, #0b6e4f);
+  height: 100%;
+  transition: width 0.4s ease;
+}
