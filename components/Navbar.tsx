@@ -44,6 +44,8 @@ export default async function Navbar() {
           <Link href="/tasbih" className={linkCls}>{t("nav.tasbih")}</Link>
           <Link href="/prayer-times" className={linkCls}>{t("nav.prayer")}</Link>
           <Link href="/questions" className={linkCls}>{t("nav.ayahs")}</Link>
+          <Link href="/names" className={linkCls}>{t("nav.names")}</Link>
+          <Link href="/qibla" className={linkCls}>{t("nav.qibla")}</Link>
           <Link href="/profile" className={linkCls}>{t("nav.profile")}</Link>
           <Link href="/support" className={linkCls}>{t("nav.support")}</Link>
 

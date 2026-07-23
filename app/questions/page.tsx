@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useT } from "@/components/LanguageProvider";
 
 type AyahResult = {
@@ -10,6 +10,7 @@ type AyahResult = {
   arabic: string;
   tafsir: string;
   english: string;
+  audio: string;
 };
 
 const EXAMPLES = [
@@ -27,6 +28,25 @@ export default function QuestionsPage() {
   const [result, setResult] = useState<AyahResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [playing, setPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  function toggleAudio(url: string) {
+    if (!audioRef.current) {
+      audioRef.current = new Audio(url);
+      audioRef.current.onended = () => setPlaying(false);
+    }
+    if (audioRef.current.src !== url) {
+      audioRef.current.src = url;
+    }
+    if (playing) {
+      audioRef.current.pause();
+      setPlaying(false);
+    } else {
+      audioRef.current.play();
+      setPlaying(true);
+    }
+  }
 
   async function lookup(s: number, a: number) {
     if (s < 1 || s > 114 || a < 1) {
@@ -36,15 +56,19 @@ export default function QuestionsPage() {
     setLoading(true);
     setError(null);
     setResult(null);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      setPlaying(false);
+    }
     try {
       const r = await fetch(
-        `https://api.alquran.cloud/v1/ayah/${s}:${a}/editions/quran-uthmani,ar.muyassar,en.sahih`
+        `https://api.alquran.cloud/v1/ayah/${s}:${a}/editions/quran-uthmani,ar.muyassar,en.sahih,ar.alafasy`
       );
       const j = await r.json();
       if (j.code !== 200 || !Array.isArray(j.data)) {
         throw new Error("not found");
       }
-      const [uthmani, muyassar, sahih] = j.data;
+      const [uthmani, muyassar, sahih, alafasy] = j.data;
       setResult({
         surahName: uthmani.surah?.name ?? "",
         surahEnglish: uthmani.surah?.englishName ?? "",
@@ -52,6 +76,7 @@ export default function QuestionsPage() {
         arabic: uthmani.text ?? "",
         tafsir: muyassar?.text ?? "",
         english: sahih?.text ?? "",
+        audio: alafasy?.audio ?? "",
       });
     } catch {
       setError(t("q.errNotFound"));
@@ -137,6 +162,14 @@ export default function QuestionsPage() {
             <p className="font-quran text-3xl leading-loose text-[var(--foreground)]">
               {result.arabic}
             </p>
+            {result.audio && (
+              <button
+                onClick={() => toggleAudio(result.audio)}
+                className="mt-4 rounded-xl bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800"
+              >
+                {playing ? t("q.pause") : t("q.listen")}
+              </button>
+            )}
           </div>
 
           <div className="rounded-2xl border border-[var(--border)] bg-[var(--done)] p-6">

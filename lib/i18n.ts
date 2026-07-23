@@ -172,6 +172,26 @@ const ar: Dict = {
   "q.meaning": "📖 المعنى (التفسير الميسّر)",
   "q.english": "🌍 English meaning",
   "q.source": "المصدر: AlQuran Cloud — التفسير الميسّر.",
+  "q.listen": "🔊 استماع للتلاوة",
+  "q.pause": "⏸️ إيقاف",
+
+  "nav.qibla": "القبلة",
+  "nav.names": "الأسماء",
+
+  "qibla.title": "بوصلة القبلة",
+  "qibla.subtitle": "وجّه جهازك لمعرفة اتجاه القبلة.",
+  "qibla.enable": "تفعيل البوصلة",
+  "qibla.bearing": "اتجاه القبلة من الشمال",
+  "qibla.locating": "جارِ تحديد موقعك...",
+  "qibla.hint": "اسمح بالوصول للموقع والبوصلة، وأمسك الجهاز مستويًا.",
+  "qibla.err": "تعذّر تحديد موقعك، فعّل خدمة الموقع.",
+  "qibla.aligned": "أنت تواجه القبلة الآن ✅",
+  "qibla.kaaba": "الكعبة المشرّفة",
+
+  "names.title": "أسماء الله الحسنى",
+  "names.subtitle": "أسماء الله الحسنى ومعانيها.",
+  "names.loading": "جارِ التحميل...",
+  "names.err": "تعذّر التحميل، حاول لاحقًا.",
 
   "lang.choose": "اختر لغتك",
   "lang.chooseSub": "يمكنك تغييرها لاحقًا من الأعلى",
@@ -343,6 +363,26 @@ const en: Dict = {
   "q.meaning": "📖 Meaning (Al-Muyassar tafsir)",
   "q.english": "🌍 English meaning",
   "q.source": "Source: AlQuran Cloud — Al-Muyassar tafsir.",
+  "q.listen": "🔊 Listen to recitation",
+  "q.pause": "⏸️ Pause",
+
+  "nav.qibla": "Qibla",
+  "nav.names": "Names",
+
+  "qibla.title": "Qibla Compass",
+  "qibla.subtitle": "Point your device to find the Qibla direction.",
+  "qibla.enable": "Enable compass",
+  "qibla.bearing": "Qibla bearing from North",
+  "qibla.locating": "Detecting your location...",
+  "qibla.hint": "Allow location & compass access, and hold the device flat.",
+  "qibla.err": "Couldn't get your location, enable location services.",
+  "qibla.aligned": "You are facing the Qibla now ✅",
+  "qibla.kaaba": "The Holy Kaaba",
+
+  "names.title": "The 99 Names of Allah",
+  "names.subtitle": "Allah's beautiful names and their meanings.",
+  "names.loading": "Loading...",
+  "names.err": "Couldn't load, try again later.",
 
   "lang.choose": "Choose your language",
   "lang.chooseSub": "You can change it later from the top",
