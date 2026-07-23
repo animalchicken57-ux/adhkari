@@ -2,7 +2,8 @@
 
 import { type CSSProperties, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { CATEGORY_LABEL, type Adhkar, type Category } from "@/lib/types";
+import { type Adhkar, type Category } from "@/lib/types";
+import { useT } from "@/components/LanguageProvider";
 
 function todayStr(): string {
   // تاريخ اليوم بتوقيت المستخدم المحلي (YYYY-MM-DD)
@@ -19,6 +20,7 @@ export default function AdhkarTracker({
   userId: string;
 }) {
   const supabase = createClient();
+  const t = useT();
   const day = todayStr();
 
   const [tab, setTab] = useState<Category>(() =>
@@ -118,7 +120,7 @@ export default function AdhkarTracker({
             }`}
           >
             {c === "morning" ? "🌅 " : "🌙 "}
-            {CATEGORY_LABEL[c]}
+            {t(`cat.${c}`)}
           </button>
         ))}
       </div>
@@ -126,7 +128,7 @@ export default function AdhkarTracker({
       {/* شريط التقدم */}
       <div className="mb-6 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
         <div className="mb-2 flex items-center justify-between text-sm font-medium text-[var(--muted)]">
-          <span>تقدّم {CATEGORY_LABEL[tab]}</span>
+          <span>{t("tracker.progress")} · {t(`cat.${tab}`)}</span>
           <span>
             {doneCount} / {list.length}
           </span>
@@ -136,14 +138,14 @@ export default function AdhkarTracker({
         </div>
         {pct === 100 && list.length > 0 && (
           <p className="mt-3 text-center font-semibold text-[var(--accent-strong)]">
-            🎉 ما شاء الله! أتممت {CATEGORY_LABEL[tab]} لليوم. تقبّل الله.
+            {t("tracker.complete", { cat: t(`cat.${tab}`) })}
           </p>
         )}
       </div>
 
       {/* التحكّم بحجم الخط */}
       <div className="mb-4 flex items-center justify-end gap-2 text-sm text-[var(--muted)]">
-        <span>حجم الخط</span>
+        <span>{t("tracker.fontSize")}</span>
         <button
           onClick={() => changeFont(-0.15)}
           className="h-8 w-8 rounded-lg border border-[var(--border)] font-bold hover:bg-[var(--hover)]"
@@ -161,7 +163,7 @@ export default function AdhkarTracker({
       </div>
 
       {loading ? (
-        <p className="py-10 text-center text-[var(--muted)]">جارِ التحميل...</p>
+        <p className="py-10 text-center text-[var(--muted)]">{t("tracker.loading")}</p>
       ) : (
         <div
           className="space-y-4"
@@ -182,7 +184,7 @@ export default function AdhkarTracker({
                 <div className="mb-2 flex items-center justify-between gap-2">
                   <h3 className="font-bold text-[var(--foreground)]">{a.title}</h3>
                   <span className="shrink-0 rounded-full bg-[var(--hover)] px-2.5 py-0.5 text-xs font-medium text-[var(--muted)]">
-                    التكرار: {a.repeat}
+                    {t("tracker.repeat")}: {a.repeat}
                   </span>
                 </div>
 
@@ -204,7 +206,7 @@ export default function AdhkarTracker({
                         : "bg-emerald-700 text-white hover:bg-emerald-800 active:scale-[0.99]"
                     }`}
                   >
-                    {isDone ? "✓ تمّ" : `${c} / ${a.repeat} — اضغط`}
+                    {isDone ? t("tracker.done") : `${c} / ${a.repeat} — ${t("tracker.tap")}`}
                   </button>
                   {(isDone || c > 0) && (
                     <button

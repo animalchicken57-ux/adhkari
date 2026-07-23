@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useT } from "@/components/LanguageProvider";
 
 const PRESETS = [
   "سُبْحَانَ اللَّهِ",
@@ -16,6 +17,7 @@ const PRESETS = [
 const TARGETS = [33, 99, 100, 0]; // 0 = بلا حدّ
 
 export default function TasbihPage() {
+  const t = useT();
   const [dhikr, setDhikr] = useState(PRESETS[0]);
   const [count, setCount] = useState(0);
   const [rounds, setRounds] = useState(0);
@@ -71,8 +73,8 @@ export default function TasbihPage() {
   return (
     <div className="mx-auto max-w-xl px-4 py-8">
       <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">المسبحة الرقمية</h1>
-        <p className="mt-1 text-[var(--muted)]">اختر ذِكرًا واضغط للعدّ. يُحفظ تلقائيًا.</p>
+        <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("tasbih.title")}</h1>
+        <p className="mt-1 text-[var(--muted)]">{t("tasbih.subtitle")}</p>
       </div>
 
       {/* اختيار الذكر */}
@@ -97,7 +99,7 @@ export default function TasbihPage() {
 
       {/* اختيار الهدف */}
       <div className="mb-5 flex items-center justify-center gap-2 text-sm">
-        <span className="text-[var(--muted)]">الهدف:</span>
+        <span className="text-[var(--muted)]">{t("tasbih.target")}</span>
         {TARGETS.map((t) => (
           <button
             key={t}
@@ -126,9 +128,9 @@ export default function TasbihPage() {
         </span>
         <span className="text-6xl font-bold text-[var(--accent-strong)]">{count}</span>
         {target > 0 && (
-          <span className="mt-1 text-sm text-[var(--muted)]">من {target}</span>
+          <span className="mt-1 text-sm text-[var(--muted)]">{t("tasbih.of")} {target}</span>
         )}
-        <span className="mt-3 text-xs text-[var(--muted)]">اضغط في أي مكان</span>
+        <span className="mt-3 text-xs text-[var(--muted)]">{t("tasbih.tapAnywhere")}</span>
       </button>
 
       {/* شريط التقدّم للهدف */}
@@ -144,19 +146,19 @@ export default function TasbihPage() {
       <div className="mt-6 flex items-center justify-center gap-3">
         <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-2 text-center">
           <div className="text-xl font-bold text-[var(--foreground)]">{rounds}</div>
-          <div className="text-xs text-[var(--muted)]">جولات مكتملة</div>
+          <div className="text-xs text-[var(--muted)]">{t("tasbih.rounds")}</div>
         </div>
         <button
           onClick={() => setVibrate((v) => !v)}
           className="rounded-xl border border-[var(--border)] px-4 py-3 text-sm text-[var(--muted)] hover:bg-[var(--hover)]"
         >
-          {vibrate ? "📳 الاهتزاز مفعّل" : "🔕 الاهتزاز متوقف"}
+          {vibrate ? t("tasbih.vibeOn") : t("tasbih.vibeOff")}
         </button>
         <button
           onClick={resetAll}
           className="rounded-xl border border-[var(--border)] px-4 py-3 text-sm text-[var(--muted)] hover:bg-[var(--hover)]"
         >
-          ↻ تصفير
+          {t("tasbih.reset")}
         </button>
       </div>
     </div>

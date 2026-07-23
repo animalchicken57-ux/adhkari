@@ -1,24 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useT } from "@/components/LanguageProvider";
 
 type Timings = Record<string, string>;
 
-const PRAYERS: { key: string; label: string; icon: string }[] = [
-  { key: "Fajr", label: "الفجر", icon: "🌄" },
-  { key: "Sunrise", label: "الشروق", icon: "🌅" },
-  { key: "Dhuhr", label: "الظهر", icon: "☀️" },
-  { key: "Asr", label: "العصر", icon: "🌤️" },
-  { key: "Maghrib", label: "المغرب", icon: "🌇" },
-  { key: "Isha", label: "العشاء", icon: "🌙" },
+const PRAYERS: { key: string; icon: string }[] = [
+  { key: "Fajr", icon: "🌄" },
+  { key: "Sunrise", icon: "🌅" },
+  { key: "Dhuhr", icon: "☀️" },
+  { key: "Asr", icon: "🌤️" },
+  { key: "Maghrib", icon: "🌇" },
+  { key: "Isha", icon: "🌙" },
 ];
 
 // أوقات لحساب "الصلاة القادمة" (بدون الشروق)
 const NEXT_ORDER = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
 
-function to12h(t: string): string {
-  const [h, m] = t.split(":").map(Number);
-  const period = h < 12 ? "ص" : "م";
+function to12h(time: string, am: string, pm: string): string {
+  const [h, m] = time.split(":").map(Number);
+  const period = h < 12 ? am : pm;
   const h12 = h % 12 === 0 ? 12 : h % 12;
   return `${h12}:${String(m).padStart(2, "0")} ${period}`;
 }
@@ -29,6 +30,7 @@ function minutes(t: string): number {
 }
 
 export default function PrayerTimesPage() {
+  const t = useT();
   const [timings, setTimings] = useState<Timings | null>(null);
   const [place, setPlace] = useState("");
   const [dateLabel, setDateLabel] = useState("");
@@ -47,9 +49,9 @@ export default function PrayerTimesPage() {
       const j = await r.json();
       setTimings(j.data.timings);
       setDateLabel(j.data.date?.readable ?? "");
-      setPlace(j.data.meta?.timezone ?? "موقعك الحالي");
+      setPlace(j.data.meta?.timezone ?? "");
     } catch {
-      setError("تعذّر جلب الأوقات، جرّب إدخال المدينة يدويًا.");
+      setError(t("prayer.errFetch"));
     } finally {
       setLoading(false);
     }
@@ -70,7 +72,7 @@ export default function PrayerTimesPage() {
       setDateLabel(j.data.date?.readable ?? "");
       setPlace(`${c} — ${co}`);
     } catch {
-      setError("لم نجد هذه المدينة، تأكّد من الاسم بالإنجليزية.");
+      setError(t("prayer.errCity"));
     } finally {
       setLoading(false);
     }
@@ -101,9 +103,9 @@ export default function PrayerTimesPage() {
   return (
     <div className="mx-auto max-w-xl px-4 py-8">
       <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">أوقات الصلاة</h1>
+        <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("prayer.title")}</h1>
         <p className="mt-1 text-[var(--muted)]">
-          {place ? place : "جارِ تحديد موقعك..."}
+          {place ? place : t("prayer.locating")}
           {dateLabel ? ` · ${dateLabel}` : ""}
         </p>
       </div>
@@ -119,25 +121,25 @@ export default function PrayerTimesPage() {
         <input
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          placeholder="City (English)"
+          placeholder={t("prayer.cityPh")}
           className="w-32 rounded-xl border border-[var(--border)] bg-[var(--card)] px-3 py-2 text-sm text-[var(--foreground)] outline-none focus:border-emerald-500"
         />
         <input
           value={country}
           onChange={(e) => setCountry(e.target.value)}
-          placeholder="Country"
+          placeholder={t("prayer.countryPh")}
           className="w-40 rounded-xl border border-[var(--border)] bg-[var(--card)] px-3 py-2 text-sm text-[var(--foreground)] outline-none focus:border-emerald-500"
         />
         <button
           type="submit"
           className="rounded-xl bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800"
         >
-          عرض
+          {t("prayer.show")}
         </button>
       </form>
 
       {loading && (
-        <p className="py-10 text-center text-[var(--muted)]">جارِ التحميل...</p>
+        <p className="py-10 text-center text-[var(--muted)]">{t("prayer.loading")}</p>
       )}
       {error && (
         <p className="mb-4 rounded-lg bg-red-50 px-3 py-2 text-center text-sm text-red-700">
@@ -160,15 +162,17 @@ export default function PrayerTimesPage() {
               >
                 <span className="flex items-center gap-2 font-semibold text-[var(--foreground)]">
                   <span className="text-xl">{p.icon}</span>
-                  {p.label}
+                  {t(`prayer.${p.key}`)}
                   {isNext && (
                     <span className="rounded-full bg-emerald-700 px-2 py-0.5 text-xs text-white">
-                      القادمة
+                      {t("prayer.next")}
                     </span>
                   )}
                 </span>
                 <span className="text-lg font-bold text-[var(--accent-strong)]">
-                  {timings[p.key] ? to12h(timings[p.key]) : "—"}
+                  {timings[p.key]
+                    ? to12h(timings[p.key], t("time.am"), t("time.pm"))
+                    : "—"}
                 </span>
               </div>
             );
@@ -176,9 +180,7 @@ export default function PrayerTimesPage() {
         </div>
       )}
 
-      <p className="mt-6 text-center text-xs text-[var(--muted)]">
-        الأوقات عبر خدمة Aladhan (طريقة أم القرى). قد تختلف دقائق حسب جهة الحساب.
-      </p>
+      <p className="mt-6 text-center text-xs text-[var(--muted)]">{t("prayer.note")}</p>
     </div>
   );
 }

@@ -12,10 +12,10 @@ export async function updateProfile(
   const fullName = String(formData.get("full_name") ?? "").trim();
 
   if (!fullName) {
-    return { ok: false, message: "الاسم لا يمكن أن يكون فارغًا." };
+    return { ok: false, message: "profile.editorEmpty" };
   }
   if (fullName.length > 60) {
-    return { ok: false, message: "الاسم طويل جدًا." };
+    return { ok: false, message: "profile.editorLong" };
   }
 
   const supabase = await createClient();
@@ -23,7 +23,7 @@ export async function updateProfile(
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    return { ok: false, message: "يجب تسجيل الدخول." };
+    return { ok: false, message: "profile.mustLogin" };
   }
 
   const { error } = await supabase
@@ -32,9 +32,9 @@ export async function updateProfile(
     .eq("id", user.id);
 
   if (error) {
-    return { ok: false, message: "تعذّر الحفظ، حاول لاحقًا." };
+    return { ok: false, message: "profile.editorFail" };
   }
 
   revalidatePath("/profile");
-  return { ok: true, message: "تم حفظ اسمك ✅" };
+  return { ok: true, message: "profile.editorSaved" };
 }

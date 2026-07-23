@@ -4,6 +4,8 @@ import { computeStats, buildHeatmap, type CompletionRow } from "@/lib/stats";
 import type { Category } from "@/lib/types";
 import Heatmap from "@/components/Heatmap";
 import ProfileEditor from "@/components/ProfileEditor";
+import { getLang } from "@/lib/lang-server";
+import { getT } from "@/lib/i18n";
 
 export const metadata = { title: "ملفّي — أذكاري" };
 
@@ -15,6 +17,8 @@ function todayStr(): string {
 
 export default async function ProfilePage() {
   const supabase = await createClient();
+  const lang = await getLang();
+  const t = getT(lang);
 
   const {
     data: { user },
@@ -48,7 +52,7 @@ export default async function ProfilePage() {
   const heatmap = buildHeatmap(rows, totals, todayStr(), 35);
 
   const memberSince = profile?.created_at
-    ? new Date(profile.created_at).toLocaleDateString("ar", {
+    ? new Date(profile.created_at).toLocaleDateString(lang, {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -64,10 +68,10 @@ export default async function ProfilePage() {
         </div>
         <div className="min-w-0 flex-1">
           <h1 className="truncate text-xl font-bold text-[var(--foreground)]">
-            {profile?.full_name || "بدون اسم"}
+            {profile?.full_name || t("profile.noName")}
           </h1>
           <p className="truncate text-sm text-[var(--muted)]">{user.email}</p>
-          <p className="mt-1 text-xs text-[var(--muted)]">عضو منذ: {memberSince}</p>
+          <p className="mt-1 text-xs text-[var(--muted)]">{t("profile.memberSince")}: {memberSince}</p>
           <div className="mt-3">
             <ProfileEditor initialName={profile?.full_name || ""} />
           </div>
@@ -75,23 +79,23 @@ export default async function ProfilePage() {
       </div>
 
       {/* الإحصاءات */}
-      <h2 className="mb-3 text-lg font-bold text-[var(--foreground)]">إحصاءاتك</h2>
+      <h2 className="mb-3 text-lg font-bold text-[var(--foreground)]">{t("profile.stats")}</h2>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard label="السلسلة الحالية" value={`${stats.currentStreak} يوم`} icon="🔥" />
-        <StatCard label="أطول سلسلة" value={`${stats.longestStreak} يوم`} icon="🏆" />
-        <StatCard label="أيام مكتملة" value={`${stats.fullDays}`} icon="📅" />
-        <StatCard label="إجمالي الأذكار" value={`${stats.totalCompletions}`} icon="📿" />
+        <StatCard label={t("profile.currentStreak")} value={`${stats.currentStreak} ${t("profile.days")}`} icon="🔥" />
+        <StatCard label={t("profile.longestStreak")} value={`${stats.longestStreak} ${t("profile.days")}`} icon="🏆" />
+        <StatCard label={t("profile.completedDays")} value={`${stats.fullDays}`} icon="📅" />
+        <StatCard label={t("profile.totalAdhkar")} value={`${stats.totalCompletions}`} icon="📿" />
       </div>
 
       <p className="mt-6 rounded-2xl border border-[var(--border)] bg-[var(--done)] p-4 text-center text-[var(--foreground)]">
         {stats.currentStreak > 0
-          ? `أحسنت! حافظت على وردك ${stats.currentStreak} يومًا متتاليًا. استمر 🌟`
-          : "ابدأ اليوم أول سلسلة لك — أتمم أذكار الصباح أو المساء كاملةً 🌱"}
+          ? t("profile.motivateOn", { n: stats.currentStreak })
+          : t("profile.motivateOff")}
       </p>
 
       {/* الخريطة الحرارية */}
       <div className="mt-8">
-        <Heatmap days={heatmap} />
+        <Heatmap days={heatmap} t={t} />
       </div>
     </div>
   );

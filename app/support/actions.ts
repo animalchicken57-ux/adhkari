@@ -14,7 +14,7 @@ export async function submitTicket(
   const message = String(formData.get("message") ?? "").trim();
 
   if (!subject || !message) {
-    return { ok: false, message: "يرجى تعبئة الموضوع والرسالة." };
+    return { ok: false, message: "support.errFill" };
   }
 
   const supabase = await createClient();
@@ -22,7 +22,7 @@ export async function submitTicket(
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    return { ok: false, message: "يجب تسجيل الدخول أولاً." };
+    return { ok: false, message: "support.errLogin" };
   }
 
   const { error } = await supabase.from("support_tickets").insert({
@@ -33,7 +33,7 @@ export async function submitTicket(
   });
 
   if (error) {
-    return { ok: false, message: "تعذّر الإرسال، حاول لاحقًا." };
+    return { ok: false, message: "support.errFail" };
   }
 
   // إشعار فوري على الجوال عبر ntfy (اشترك في نفس الموضوع من تطبيق ntfy)
@@ -49,5 +49,5 @@ export async function submitTicket(
   }
 
   revalidatePath("/support");
-  return { ok: true, message: "تم استلام رسالتك، شكرًا لتواصلك معنا! 🌿" };
+  return { ok: true, message: "support.successMsg" };
 }

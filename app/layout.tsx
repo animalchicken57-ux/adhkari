@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import { Tajawal, Amiri } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { LanguageProvider } from "@/components/LanguageProvider";
+import LanguageGate from "@/components/LanguageGate";
+import { getLang } from "@/lib/lang-server";
+import { getT, dir } from "@/lib/i18n";
 
 const tajawal = Tajawal({
   variable: "--font-tajawal",
-  subsets: ["arabic"],
+  subsets: ["arabic", "latin"],
   weight: ["400", "500", "700"],
 });
 
@@ -16,20 +20,23 @@ const amiri = Amiri({
 });
 
 export const metadata: Metadata = {
-  title: "أذكاري — متتبّع أذكار الصباح والمساء",
+  title: "أذكاري · Adhkari — Morning & Evening Adhkar",
   description:
     "تطبيق يساعدك على المحافظة على أذكار الصباح والمساء بعدّاد تفاعلي، متابعة يومية، وسلاسل تحفيزية.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const lang = await getLang();
+  const t = getT(lang);
+
   return (
     <html
-      lang="ar"
-      dir="rtl"
+      lang={lang}
+      dir={dir(lang)}
       suppressHydrationWarning
       className={`${tajawal.variable} ${amiri.variable} h-full antialiased`}
     >
@@ -39,11 +46,14 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}})();`,
           }}
         />
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <footer className="border-t border-[var(--border)] py-6 text-center text-sm text-[var(--muted)]">
-          أذكاري — رفيقك اليومي لأذكار الصباح والمساء
-        </footer>
+        <LanguageProvider lang={lang}>
+          <LanguageGate />
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <footer className="border-t border-[var(--border)] py-6 text-center text-sm text-[var(--muted)]">
+            {t("footer")}
+          </footer>
+        </LanguageProvider>
       </body>
     </html>
   );

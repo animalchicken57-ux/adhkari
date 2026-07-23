@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useT } from "@/components/LanguageProvider";
 
 type AyahResult = {
   surahName: string;
@@ -20,6 +21,7 @@ const EXAMPLES = [
 ];
 
 export default function QuestionsPage() {
+  const t = useT();
   const [surah, setSurah] = useState(2);
   const [ayah, setAyah] = useState(255);
   const [result, setResult] = useState<AyahResult | null>(null);
@@ -28,7 +30,7 @@ export default function QuestionsPage() {
 
   async function lookup(s: number, a: number) {
     if (s < 1 || s > 114 || a < 1) {
-      setError("رقم السورة من ١ إلى ١١٤ ورقم الآية موجب.");
+      setError(t("q.errRange"));
       return;
     }
     setLoading(true);
@@ -52,7 +54,7 @@ export default function QuestionsPage() {
         english: sahih?.text ?? "",
       });
     } catch {
-      setError("لم نجد هذه الآية، تأكّد من رقم السورة والآية.");
+      setError(t("q.errNotFound"));
     } finally {
       setLoading(false);
     }
@@ -61,10 +63,8 @@ export default function QuestionsPage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
       <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">معاني آيات القرآن</h1>
-        <p className="mt-1 text-[var(--muted)]">
-          اكتب رقم السورة والآية، وسيظهر لك نصّها ومعناها (التفسير الميسّر).
-        </p>
+        <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("q.title")}</h1>
+        <p className="mt-1 text-[var(--muted)]">{t("q.subtitle")}</p>
       </div>
 
       {/* أمثلة سريعة */}
@@ -93,7 +93,7 @@ export default function QuestionsPage() {
         className="mb-6 flex flex-wrap items-end justify-center gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4"
       >
         <label className="text-sm">
-          <span className="mb-1 block text-[var(--muted)]">السورة (١-١١٤)</span>
+          <span className="mb-1 block text-[var(--muted)]">{t("q.surah")}</span>
           <input
             type="number"
             min={1}
@@ -104,7 +104,7 @@ export default function QuestionsPage() {
           />
         </label>
         <label className="text-sm">
-          <span className="mb-1 block text-[var(--muted)]">رقم الآية</span>
+          <span className="mb-1 block text-[var(--muted)]">{t("q.ayah")}</span>
           <input
             type="number"
             min={1}
@@ -117,11 +117,11 @@ export default function QuestionsPage() {
           type="submit"
           className="rounded-xl bg-emerald-700 px-5 py-2.5 font-semibold text-white hover:bg-emerald-800"
         >
-          إظهار المعنى
+          {t("q.show")}
         </button>
       </form>
 
-      {loading && <p className="py-8 text-center text-[var(--muted)]">جارِ البحث...</p>}
+      {loading && <p className="py-8 text-center text-[var(--muted)]">{t("q.searching")}</p>}
       {error && (
         <p className="mb-4 rounded-lg bg-red-50 px-3 py-2 text-center text-sm text-red-700">
           {error}
@@ -132,7 +132,7 @@ export default function QuestionsPage() {
         <div className="space-y-4">
           <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 text-center">
             <div className="mb-3 text-sm font-medium text-[var(--accent-strong)]">
-              سورة {result.surahName} — الآية {result.ayahNumber}
+              {t("q.surahLabel")} {result.surahName} — {t("q.ayahLabel")} {result.ayahNumber}
             </div>
             <p className="font-quran text-3xl leading-loose text-[var(--foreground)]">
               {result.arabic}
@@ -140,13 +140,13 @@ export default function QuestionsPage() {
           </div>
 
           <div className="rounded-2xl border border-[var(--border)] bg-[var(--done)] p-6">
-            <h3 className="mb-2 font-bold text-[var(--foreground)]">📖 المعنى (التفسير الميسّر)</h3>
+            <h3 className="mb-2 font-bold text-[var(--foreground)]">{t("q.meaning")}</h3>
             <p className="leading-loose text-[var(--foreground)]">{result.tafsir}</p>
           </div>
 
           {result.english && (
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
-              <h3 className="mb-2 font-bold text-[var(--foreground)]">🌍 English meaning</h3>
+              <h3 className="mb-2 font-bold text-[var(--foreground)]">{t("q.english")}</h3>
               <p dir="ltr" className="text-left leading-relaxed text-[var(--muted)]">
                 {result.english}
               </p>
@@ -155,9 +155,7 @@ export default function QuestionsPage() {
         </div>
       )}
 
-      <p className="mt-6 text-center text-xs text-[var(--muted)]">
-        المصدر: AlQuran Cloud — التفسير الميسّر.
-      </p>
+      <p className="mt-6 text-center text-xs text-[var(--muted)]">{t("q.source")}</p>
     </div>
   );
 }
