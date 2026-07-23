@@ -1,6 +1,8 @@
 import AuthForm from "@/components/AuthForm";
 
 export const metadata = { title: "إنشاء حساب — أذكاري" };
+// تُصيَّر عند الطلب (تتفادى فشل البناء إن غابت متغيّرات البيئة أثناء الـ prerender)
+export const dynamic = "force-dynamic";
 
 export default function SignupPage() {
   return (
