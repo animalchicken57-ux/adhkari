@@ -1,7 +1,9 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { computeStats, type CompletionRow } from "@/lib/stats";
+import { computeStats, buildHeatmap, type CompletionRow } from "@/lib/stats";
 import type { Category } from "@/lib/types";
+import Heatmap from "@/components/Heatmap";
+import ProfileEditor from "@/components/ProfileEditor";
 
 export const metadata = { title: "ملفّي — أذكاري" };
 
@@ -43,6 +45,7 @@ export default async function ProfilePage() {
   );
 
   const stats = computeStats(rows, totals, todayStr());
+  const heatmap = buildHeatmap(rows, totals, todayStr(), 35);
 
   const memberSince = profile?.created_at
     ? new Date(profile.created_at).toLocaleDateString("ar", {
@@ -59,14 +62,15 @@ export default async function ProfilePage() {
         <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-emerald-700 text-2xl font-bold text-white">
           {(profile?.full_name || user.email || "؟").trim().charAt(0)}
         </div>
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <h1 className="truncate text-xl font-bold text-[var(--foreground)]">
             {profile?.full_name || "بدون اسم"}
           </h1>
           <p className="truncate text-sm text-[var(--muted)]">{user.email}</p>
-          <p className="mt-1 text-xs text-[var(--muted)]">
-            عضو منذ: {memberSince}
-          </p>
+          <p className="mt-1 text-xs text-[var(--muted)]">عضو منذ: {memberSince}</p>
+          <div className="mt-3">
+            <ProfileEditor initialName={profile?.full_name || ""} />
+          </div>
         </div>
       </div>
 
@@ -84,6 +88,11 @@ export default async function ProfilePage() {
           ? `أحسنت! حافظت على وردك ${stats.currentStreak} يومًا متتاليًا. استمر 🌟`
           : "ابدأ اليوم أول سلسلة لك — أتمم أذكار الصباح أو المساء كاملةً 🌱"}
       </p>
+
+      {/* الخريطة الحرارية */}
+      <div className="mt-8">
+        <Heatmap days={heatmap} />
+      </div>
     </div>
   );
 }
