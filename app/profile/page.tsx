@@ -55,23 +55,23 @@ export default async function ProfilePage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
       {/* بطاقة المستخدم */}
-      <div className="mb-8 flex items-center gap-4 rounded-2xl border border-emerald-900/10 bg-[var(--card)] p-6">
+      <div className="mb-8 flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
         <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-emerald-700 text-2xl font-bold text-white">
           {(profile?.full_name || user.email || "؟").trim().charAt(0)}
         </div>
         <div className="min-w-0">
-          <h1 className="truncate text-xl font-bold text-emerald-900">
+          <h1 className="truncate text-xl font-bold text-[var(--foreground)]">
             {profile?.full_name || "بدون اسم"}
           </h1>
-          <p className="truncate text-sm text-emerald-900/60">{user.email}</p>
-          <p className="mt-1 text-xs text-emerald-900/50">
+          <p className="truncate text-sm text-[var(--muted)]">{user.email}</p>
+          <p className="mt-1 text-xs text-[var(--muted)]">
             عضو منذ: {memberSince}
           </p>
         </div>
       </div>
 
       {/* الإحصاءات */}
-      <h2 className="mb-3 text-lg font-bold text-emerald-900">إحصاءاتك</h2>
+      <h2 className="mb-3 text-lg font-bold text-[var(--foreground)]">إحصاءاتك</h2>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard label="السلسلة الحالية" value={`${stats.currentStreak} يوم`} icon="🔥" />
         <StatCard label="أطول سلسلة" value={`${stats.longestStreak} يوم`} icon="🏆" />
@@ -79,7 +79,7 @@ export default async function ProfilePage() {
         <StatCard label="إجمالي الأذكار" value={`${stats.totalCompletions}`} icon="📿" />
       </div>
 
-      <p className="mt-6 rounded-2xl border border-emerald-900/10 bg-emerald-50/50 p-4 text-center text-emerald-800">
+      <p className="mt-6 rounded-2xl border border-[var(--border)] bg-[var(--done)] p-4 text-center text-[var(--foreground)]">
         {stats.currentStreak > 0
           ? `أحسنت! حافظت على وردك ${stats.currentStreak} يومًا متتاليًا. استمر 🌟`
           : "ابدأ اليوم أول سلسلة لك — أتمم أذكار الصباح أو المساء كاملةً 🌱"}
@@ -98,10 +98,10 @@ function StatCard({
   icon: string;
 }) {
   return (
-    <div className="rounded-2xl border border-emerald-900/10 bg-[var(--card)] p-4 text-center">
+    <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-center">
       <div className="text-2xl">{icon}</div>
-      <div className="mt-1 text-xl font-bold text-emerald-900">{value}</div>
-      <div className="text-xs text-emerald-900/60">{label}</div>
+      <div className="mt-1 text-xl font-bold text-[var(--foreground)]">{value}</div>
+      <div className="text-xs text-[var(--muted)]">{label}</div>
     </div>
   );
 }

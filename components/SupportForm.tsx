@@ -26,25 +26,25 @@ export default function SupportForm() {
   return (
     <form action={formAction} className="space-y-4">
       <label className="block">
-        <span className="mb-1 block text-sm font-medium text-emerald-900/80">
+        <span className="mb-1 block text-sm font-medium text-[var(--muted)]">
           الموضوع
         </span>
         <input
           name="subject"
           required
           placeholder="عنوان مختصر لرسالتك"
-          className="w-full rounded-xl border border-emerald-900/15 bg-white px-3 py-2 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+          className="w-full rounded-xl border border-[var(--border)] bg-[var(--card)] px-3 py-2 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
         />
       </label>
 
       <label className="block">
-        <span className="mb-1 block text-sm font-medium text-emerald-900/80">
+        <span className="mb-1 block text-sm font-medium text-[var(--muted)]">
           النوع
         </span>
         <select
           name="category"
           defaultValue="general"
-          className="w-full rounded-xl border border-emerald-900/15 bg-white px-3 py-2 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+          className="w-full rounded-xl border border-[var(--border)] bg-[var(--card)] px-3 py-2 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
         >
           <option value="general">استفسار عام</option>
           <option value="bug">مشكلة تقنية</option>
@@ -54,7 +54,7 @@ export default function SupportForm() {
       </label>
 
       <label className="block">
-        <span className="mb-1 block text-sm font-medium text-emerald-900/80">
+        <span className="mb-1 block text-sm font-medium text-[var(--muted)]">
           الرسالة
         </span>
         <textarea
@@ -62,7 +62,7 @@ export default function SupportForm() {
           required
           rows={5}
           placeholder="اكتب رسالتك هنا..."
-          className="w-full resize-none rounded-xl border border-emerald-900/15 bg-white px-3 py-2 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+          className="w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--card)] px-3 py-2 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
         />
       </label>
 
@@ -70,7 +70,7 @@ export default function SupportForm() {
         <p
           className={`rounded-lg px-3 py-2 text-sm ${
             state.ok
-              ? "bg-emerald-50 text-emerald-800"
+              ? "bg-[var(--done)] text-[var(--foreground)]"
               : "bg-red-50 text-red-700"
           }`}
         >

@@ -1,10 +1,32 @@
 @import "tailwindcss";
 
+/* تفعيل الوضع الليلي عبر كلاس .dark على <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #f6f4ec;
-  --foreground: #17251f;
   --card: #ffffff;
+  --foreground: #16241e;
+  --muted: #5b6b63;
+  --border: rgba(16, 122, 87, 0.14);
+  --hover: rgba(16, 122, 87, 0.06);
+  --accent: #0f7a57;
+  --accent-strong: #0b6e4f;
+  --done: rgba(16, 122, 87, 0.10);
   --gold: #c9a227;
+  --quran-scale: 1;
+}
+
+html.dark {
+  --background: #0e1411;
+  --card: #171f1b;
+  --foreground: #e8efea;
+  --muted: #9fb2a8;
+  --border: rgba(255, 255, 255, 0.12);
+  --hover: rgba(255, 255, 255, 0.06);
+  --accent: #22c58a;
+  --accent-strong: #34d399;
+  --done: rgba(52, 211, 153, 0.13);
 }
 
 @theme inline {
@@ -20,17 +42,22 @@ body {
     var(--background);
   color: var(--foreground);
   font-family: var(--font-tajawal), system-ui, "Segoe UI", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* خط النصوص القرآنية والأذكار */
 .font-quran {
   font-family: var(--font-amiri), "Amiri", serif;
-  line-height: 2.1;
+  line-height: 2.15;
+}
+/* نص الذكر داخل المتتبّع — حجم قابل للتكبير/التصغير */
+.dhikr-body {
+  font-size: calc(1.2rem * var(--quran-scale, 1));
 }
 
 /* شريط تقدّم ناعم */
 .progress-track {
-  background: rgba(16, 122, 87, 0.12);
+  background: var(--hover);
   border-radius: 999px;
   overflow: hidden;
 }

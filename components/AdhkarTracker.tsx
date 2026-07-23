@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { type CSSProperties, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { CATEGORY_LABEL, type Adhkar, type Category } from "@/lib/types";
 
@@ -27,6 +27,20 @@ export default function AdhkarTracker({
   const [counts, setCounts] = useState<Record<number, number>>({});
   const [done, setDone] = useState<Set<number>>(new Set());
   const [loading, setLoading] = useState(true);
+  const [fontScale, setFontScale] = useState(1);
+
+  // حجم الخط المحفوظ
+  useEffect(() => {
+    const s = parseFloat(localStorage.getItem("adhkar-font-scale") || "1");
+    if (!Number.isNaN(s)) setFontScale(s);
+  }, []);
+  function changeFont(delta: number) {
+    setFontScale((prev) => {
+      const next = Math.min(1.8, Math.max(0.85, Math.round((prev + delta) * 100) / 100));
+      localStorage.setItem("adhkar-font-scale", String(next));
+      return next;
+    });
+  }
 
   // تحميل ما اكتمل اليوم
   useEffect(() => {
@@ -92,7 +106,7 @@ export default function AdhkarTracker({
   return (
     <div>
       {/* التبويبات */}
-      <div className="mb-5 grid grid-cols-2 gap-2 rounded-2xl bg-emerald-900/5 p-1.5">
+      <div className="mb-5 grid grid-cols-2 gap-2 rounded-2xl bg-[var(--hover)] p-1.5">
         {(["morning", "evening"] as Category[]).map((c) => (
           <button
             key={c}
@@ -100,7 +114,7 @@ export default function AdhkarTracker({
             className={`rounded-xl px-4 py-2.5 font-semibold transition ${
               tab === c
                 ? "bg-emerald-700 text-white shadow"
-                : "text-emerald-900/70 hover:bg-emerald-900/5"
+                : "text-[var(--muted)] hover:bg-[var(--hover)]"
             }`}
           >
             {c === "morning" ? "🌅 " : "🌙 "}
@@ -110,8 +124,8 @@ export default function AdhkarTracker({
       </div>
 
       {/* شريط التقدم */}
-      <div className="mb-6 rounded-2xl border border-emerald-900/10 bg-[var(--card)] p-4">
-        <div className="mb-2 flex items-center justify-between text-sm font-medium text-emerald-900/80">
+      <div className="mb-6 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
+        <div className="mb-2 flex items-center justify-between text-sm font-medium text-[var(--muted)]">
           <span>تقدّم {CATEGORY_LABEL[tab]}</span>
           <span>
             {doneCount} / {list.length}
@@ -121,16 +135,38 @@ export default function AdhkarTracker({
           <div className="progress-fill" style={{ width: `${pct}%` }} />
         </div>
         {pct === 100 && list.length > 0 && (
-          <p className="mt-3 text-center font-semibold text-emerald-700">
+          <p className="mt-3 text-center font-semibold text-[var(--accent-strong)]">
             🎉 ما شاء الله! أتممت {CATEGORY_LABEL[tab]} لليوم. تقبّل الله.
           </p>
         )}
       </div>
 
+      {/* التحكّم بحجم الخط */}
+      <div className="mb-4 flex items-center justify-end gap-2 text-sm text-[var(--muted)]">
+        <span>حجم الخط</span>
+        <button
+          onClick={() => changeFont(-0.15)}
+          className="h-8 w-8 rounded-lg border border-[var(--border)] font-bold hover:bg-[var(--hover)]"
+          aria-label="تصغير الخط"
+        >
+          −
+        </button>
+        <button
+          onClick={() => changeFont(0.15)}
+          className="h-8 w-8 rounded-lg border border-[var(--border)] font-bold hover:bg-[var(--hover)]"
+          aria-label="تكبير الخط"
+        >
+          +
+        </button>
+      </div>
+
       {loading ? (
-        <p className="py-10 text-center text-emerald-900/50">جارِ التحميل...</p>
+        <p className="py-10 text-center text-[var(--muted)]">جارِ التحميل...</p>
       ) : (
-        <div className="space-y-4">
+        <div
+          className="space-y-4"
+          style={{ ["--quran-scale" as string]: fontScale } as CSSProperties}
+        >
           {list.map((a) => {
             const isDone = done.has(a.id);
             const c = counts[a.id] ?? 0;
@@ -139,18 +175,18 @@ export default function AdhkarTracker({
                 key={a.id}
                 className={`rounded-2xl border p-5 transition ${
                   isDone
-                    ? "border-emerald-300 bg-emerald-50/70"
-                    : "border-emerald-900/10 bg-[var(--card)]"
+                    ? "border-[var(--accent)] bg-[var(--done)]"
+                    : "border-[var(--border)] bg-[var(--card)]"
                 }`}
               >
                 <div className="mb-2 flex items-center justify-between gap-2">
-                  <h3 className="font-bold text-emerald-900">{a.title}</h3>
-                  <span className="shrink-0 rounded-full bg-emerald-900/5 px-2.5 py-0.5 text-xs font-medium text-emerald-900/70">
+                  <h3 className="font-bold text-[var(--foreground)]">{a.title}</h3>
+                  <span className="shrink-0 rounded-full bg-[var(--hover)] px-2.5 py-0.5 text-xs font-medium text-[var(--muted)]">
                     التكرار: {a.repeat}
                   </span>
                 </div>
 
-                <p className="font-quran text-lg text-emerald-950/90">{a.body}</p>
+                <p className="font-quran dhikr-body text-[var(--foreground)]">{a.body}</p>
 
                 {a.virtue && (
                   <p className="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">
@@ -173,7 +209,7 @@ export default function AdhkarTracker({
                   {(isDone || c > 0) && (
                     <button
                       onClick={() => reset(a)}
-                      className="rounded-xl border border-emerald-900/15 px-3 py-3 text-sm text-emerald-900/60 hover:bg-emerald-900/5"
+                      className="rounded-xl border border-[var(--border)] px-3 py-3 text-sm text-[var(--muted)] hover:bg-[var(--hover)]"
                       title="إعادة"
                     >
                       ↻

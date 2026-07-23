@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default async function Navbar() {
   let userEmail: string | null = null;
@@ -21,29 +22,37 @@ export default async function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-20 border-b border-emerald-900/10 bg-[var(--background)]/80 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-[var(--border)] bg-[var(--background)]/80 backdrop-blur">
       <nav className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
-        <Link href="/" className="flex items-center gap-2 font-bold text-emerald-800">
+        <Link href="/" className="flex items-center gap-2 font-bold text-[var(--accent-strong)]">
           <span className="text-2xl">🕌</span>
           <span className="text-lg">أذكاري</span>
         </Link>
 
-        <div className="flex items-center gap-1 text-sm sm:gap-3">
-          <Link href="/adhkar" className="rounded-lg px-2 py-1 text-emerald-900/80 hover:bg-emerald-900/5 hover:text-emerald-900">
+        <div className="flex flex-wrap items-center justify-end gap-x-1 gap-y-1 text-sm sm:gap-x-2">
+          <Link href="/adhkar" className="rounded-lg px-2 py-1 text-[var(--muted)] hover:bg-[var(--hover)] hover:text-[var(--foreground)]">
             الأذكار
           </Link>
-          <Link href="/profile" className="rounded-lg px-2 py-1 text-emerald-900/80 hover:bg-emerald-900/5 hover:text-emerald-900">
+          <Link href="/tasbih" className="rounded-lg px-2 py-1 text-[var(--muted)] hover:bg-[var(--hover)] hover:text-[var(--foreground)]">
+            المسبحة
+          </Link>
+          <Link href="/prayer-times" className="rounded-lg px-2 py-1 text-[var(--muted)] hover:bg-[var(--hover)] hover:text-[var(--foreground)]">
+            الصلاة
+          </Link>
+          <Link href="/profile" className="rounded-lg px-2 py-1 text-[var(--muted)] hover:bg-[var(--hover)] hover:text-[var(--foreground)]">
             ملفّي
           </Link>
-          <Link href="/support" className="rounded-lg px-2 py-1 text-emerald-900/80 hover:bg-emerald-900/5 hover:text-emerald-900">
+          <Link href="/support" className="rounded-lg px-2 py-1 text-[var(--muted)] hover:bg-[var(--hover)] hover:text-[var(--foreground)]">
             الدعم
           </Link>
+
+          <ThemeToggle />
 
           {userEmail ? (
             <form action="/auth/signout" method="post">
               <button
                 type="submit"
-                className="rounded-lg bg-emerald-900/5 px-3 py-1 font-medium text-emerald-900 hover:bg-emerald-900/10"
+                className="rounded-lg bg-[var(--hover)] px-3 py-1 font-medium text-[var(--foreground)] hover:bg-[var(--hover)]"
               >
                 خروج
               </button>

@@ -65,11 +65,11 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md rounded-2xl border border-emerald-900/10 bg-[var(--card)] p-6 shadow-sm sm:p-8">
-      <h1 className="mb-1 text-2xl font-bold text-emerald-900">
+    <div className="mx-auto w-full max-w-md rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm sm:p-8">
+      <h1 className="mb-1 text-2xl font-bold text-[var(--foreground)]">
         {isSignup ? "إنشاء حساب جديد" : "تسجيل الدخول"}
       </h1>
-      <p className="mb-6 text-sm text-emerald-900/60">
+      <p className="mb-6 text-sm text-[var(--muted)]">
         {isSignup
           ? "ابدأ رحلتك اليومية مع أذكار الصباح والمساء."
           : "أهلاً بعودتك، واصل وردك اليومي."}
@@ -109,7 +109,7 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
           </p>
         )}
         {notice && (
-          <p className="rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+          <p className="rounded-lg bg-[var(--done)] px-3 py-2 text-sm text-[var(--foreground)]">
             {notice}
           </p>
         )}
@@ -123,18 +123,18 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
         </button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-emerald-900/70">
+      <p className="mt-6 text-center text-sm text-[var(--muted)]">
         {isSignup ? (
           <>
             لديك حساب بالفعل؟{" "}
-            <Link href="/login" className="font-semibold text-emerald-700 hover:underline">
+            <Link href="/login" className="font-semibold text-[var(--accent-strong)] hover:underline">
               سجّل الدخول
             </Link>
           </>
         ) : (
           <>
             ليس لديك حساب؟{" "}
-            <Link href="/signup" className="font-semibold text-emerald-700 hover:underline">
+            <Link href="/signup" className="font-semibold text-[var(--accent-strong)] hover:underline">
               أنشئ حسابًا
             </Link>
           </>
@@ -161,7 +161,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-emerald-900/80">
+      <span className="mb-1 block text-sm font-medium text-[var(--muted)]">
         {label}
       </span>
       <input
@@ -170,7 +170,7 @@ function Field({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={required}
-        className="w-full rounded-xl border border-emerald-900/15 bg-white px-3 py-2 text-emerald-950 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+        className="w-full rounded-xl border border-[var(--border)] bg-[var(--card)] px-3 py-2 text-[var(--foreground)] outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
       />
     </label>
   );

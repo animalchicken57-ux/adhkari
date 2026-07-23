@@ -22,8 +22,8 @@ export default async function AdhkarPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
       <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold text-emerald-900">أذكار اليوم</h1>
-        <p className="mt-1 text-emerald-900/60">
+        <h1 className="text-3xl font-bold text-[var(--foreground)]">أذكار اليوم</h1>
+        <p className="mt-1 text-[var(--muted)]">
           اضغط على كل ذكر حتى يكتمل عدده. تُحفظ متابعتك تلقائيًا.
         </p>
       </div>

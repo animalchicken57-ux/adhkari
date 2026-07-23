@@ -36,6 +36,18 @@ export async function submitTicket(
     return { ok: false, message: "تعذّر الإرسال، حاول لاحقًا." };
   }
 
+  // إشعار فوري على الجوال عبر ntfy (اشترك في نفس الموضوع من تطبيق ntfy)
+  const topic = process.env.NTFY_TOPIC || "adhkari-support-a7f3k9q2";
+  try {
+    await fetch(`https://ntfy.sh/${topic}`, {
+      method: "POST",
+      headers: { Title: "New Adhkari support message", Tags: "envelope" },
+      body: `[${category}] ${subject}\n${message}\n— ${user.email}`,
+    });
+  } catch {
+    // لا نُفشل الإرسال إذا تعذّر الإشعار
+  }
+
   revalidatePath("/support");
   return { ok: true, message: "تم استلام رسالتك، شكرًا لتواصلك معنا! 🌿" };
 }

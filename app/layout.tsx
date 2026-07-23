@@ -30,12 +30,18 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
+      suppressHydrationWarning
       className={`${tajawal.variable} ${amiri.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)]">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}})();`,
+          }}
+        />
         <Navbar />
         <main className="flex-1">{children}</main>
-        <footer className="border-t border-emerald-900/10 py-6 text-center text-sm text-emerald-900/60">
+        <footer className="border-t border-[var(--border)] py-6 text-center text-sm text-[var(--muted)]">
           أذكاري — رفيقك اليومي لأذكار الصباح والمساء
         </footer>
       </body>
