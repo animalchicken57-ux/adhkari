@@ -72,6 +72,26 @@ body::after {
   font-size: calc(1.2rem * var(--quran-scale, 1));
 }
 
+/* حركة الانتقال بين الصفحات */
+.page-transition {
+  animation: pageIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
+}
+
 /* شريط تقدّم ناعم */
 .progress-track {
   background: var(--hover);

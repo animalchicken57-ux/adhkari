@@ -42,6 +42,9 @@ export default async function Navbar() {
           <Link href="/prayer-times" className="rounded-lg px-2 py-1 text-[var(--muted)] hover:bg-[var(--hover)] hover:text-[var(--foreground)]">
             الصلاة
           </Link>
+          <Link href="/questions" className="rounded-lg px-2 py-1 text-[var(--muted)] hover:bg-[var(--hover)] hover:text-[var(--foreground)]">
+            الآيات
+          </Link>
           <Link href="/profile" className="rounded-lg px-2 py-1 text-[var(--muted)] hover:bg-[var(--hover)] hover:text-[var(--foreground)]">
             ملفّي
           </Link>
