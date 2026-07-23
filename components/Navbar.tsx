@@ -24,10 +24,13 @@ export default async function Navbar() {
   return (
     <header className="sticky top-0 z-20 border-b border-[var(--border)] bg-[var(--background)]/80 backdrop-blur">
       <nav className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
-        <Link href="/" className="flex items-center gap-2 font-bold text-[var(--accent-strong)]">
-          <span className="text-2xl">🕌</span>
-          <span className="text-lg">أذكاري</span>
-        </Link>
+        <div className="flex items-center gap-1">
+          <Link href="/" className="flex items-center gap-2 font-bold text-[var(--accent-strong)]">
+            <span className="text-2xl">🕌</span>
+            <span className="text-lg">أذكاري</span>
+          </Link>
+          <ThemeToggle />
+        </div>
 
         <div className="flex flex-wrap items-center justify-end gap-x-1 gap-y-1 text-sm sm:gap-x-2">
           <Link href="/adhkar" className="rounded-lg px-2 py-1 text-[var(--muted)] hover:bg-[var(--hover)] hover:text-[var(--foreground)]">
@@ -45,8 +48,6 @@ export default async function Navbar() {
           <Link href="/support" className="rounded-lg px-2 py-1 text-[var(--muted)] hover:bg-[var(--hover)] hover:text-[var(--foreground)]">
             الدعم
           </Link>
-
-          <ThemeToggle />
 
           {userEmail ? (
             <form action="/auth/signout" method="post">
