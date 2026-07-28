@@ -51,10 +51,7 @@ export default async function Navbar() {
 
           {userEmail ? (
             <form action="/auth/signout" method="post">
-              <button
-                type="submit"
-                className="rounded-lg bg-[var(--hover)] px-3 py-1 font-medium text-[var(--foreground)] hover:bg-[var(--hover)]"
-              >
+              <button type="submit" className={linkCls}>
                 {t("nav.logout")}
               </button>
             </form>
