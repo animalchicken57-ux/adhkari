@@ -13,6 +13,7 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
   const supabase = createClient();
 
   const [fullName, setFullName] = useState("");
+  const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,6 +24,15 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
     e.preventDefault();
     setError(null);
     setNotice(null);
+
+    if (isSignup) {
+      const n = Number(age);
+      if (!Number.isInteger(n) || n < 1 || n > 100) {
+        setError("err.age");
+        return;
+      }
+    }
+
     setLoading(true);
 
     try {
@@ -31,7 +41,7 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
           email,
           password,
           options: {
-            data: { full_name: fullName },
+            data: { full_name: fullName, age: Number(age) },
             emailRedirectTo:
               typeof window !== "undefined"
                 ? `${window.location.origin}/auth/callback`
@@ -70,7 +80,10 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {isSignup && (
-          <Field label={t("auth.name")} type="text" value={fullName} onChange={setFullName} placeholder={t("auth.namePh")} required />
+          <>
+            <Field label={t("auth.name")} type="text" value={fullName} onChange={setFullName} placeholder={t("auth.namePh")} required />
+            <Field label={t("auth.age")} type="number" value={age} onChange={setAge} placeholder={t("auth.agePh")} required min={1} max={100} />
+          </>
         )}
         <Field label={t("auth.email")} type="email" value={email} onChange={setEmail} placeholder="you@example.com" required />
         <Field label={t("auth.password")} type="password" value={password} onChange={setPassword} placeholder={t("auth.passwordPh")} required />
@@ -119,6 +132,8 @@ function Field({
   onChange,
   placeholder,
   required,
+  min,
+  max,
 }: {
   label: string;
   type: string;
@@ -126,6 +141,8 @@ function Field({
   onChange: (v: string) => void;
   placeholder?: string;
   required?: boolean;
+  min?: number;
+  max?: number;
 }) {
   return (
     <label className="block">
@@ -136,6 +153,8 @@ function Field({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={required}
+        min={min}
+        max={max}
         className="w-full rounded-xl border border-[var(--border)] bg-[var(--card)] px-3 py-2 text-[var(--foreground)] outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
       />
     </label>

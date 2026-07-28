@@ -9,8 +9,13 @@
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   full_name text,
+  age int check (age is null or (age between 1 and 100)),
   created_at timestamptz default now()
 );
+
+-- للجداول المنشأة سابقًا: أضف عمود العمر إن لم يكن موجودًا
+alter table public.profiles
+  add column if not exists age int check (age is null or (age between 1 and 100));
 
 alter table public.profiles enable row level security;
 
@@ -34,8 +39,12 @@ security definer
 set search_path = public
 as $$
 begin
-  insert into public.profiles (id, full_name)
-  values (new.id, coalesce(new.raw_user_meta_data->>'full_name', ''))
+  insert into public.profiles (id, full_name, age)
+  values (
+    new.id,
+    coalesce(new.raw_user_meta_data->>'full_name', ''),
+    nullif(new.raw_user_meta_data->>'age', '')::int
+  )
   on conflict (id) do nothing;
   return new;
 end;

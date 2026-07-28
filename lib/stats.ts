@@ -1,6 +1,6 @@
 import type { Category } from "./types";
 
-export type CompletionRow = { day: string; category: Category };
+export type CompletionRow = { day: string; category: Category; repeat?: number };
 
 export type Stats = {
   totalCompletions: number;
@@ -8,6 +8,8 @@ export type Stats = {
   currentStreak: number;
   longestStreak: number;
   fullDays: number;
+  // مجموع مرّات التسبيح (حاصل جمع تكرار كل ذكر أُتمّ) — إحصاءة «واو»
+  totalRepetitions: number;
 };
 
 function addDays(day: string, delta: number): string {
@@ -43,6 +45,8 @@ export function computeStats(
     );
   };
 
+  const totalRepetitions = rows.reduce((sum, r) => sum + (r.repeat ?? 1), 0);
+
   const fullDaysSet = [...byDay.keys()].filter(qualifies).sort();
 
   // أطول سلسلة
@@ -70,6 +74,7 @@ export function computeStats(
     currentStreak: current,
     longestStreak: longest,
     fullDays: fullDaysSet.length,
+    totalRepetitions,
   };
 }
 

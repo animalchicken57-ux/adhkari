@@ -14,6 +14,19 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
+// النقر على التذكير يفتح صفحة الأذكار (أو يركّز نافذة مفتوحة)
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((list) => {
+      for (const client of list) {
+        if ("focus" in client) return client.focus();
+      }
+      if (self.clients.openWindow) return self.clients.openWindow("/adhkar");
+    })
+  );
+});
+
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;

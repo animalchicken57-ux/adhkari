@@ -4,6 +4,10 @@ import { computeStats, buildHeatmap, type CompletionRow } from "@/lib/stats";
 import type { Category } from "@/lib/types";
 import Heatmap from "@/components/Heatmap";
 import ProfileEditor from "@/components/ProfileEditor";
+import Garden from "@/components/Garden";
+import MilestoneBadges from "@/components/MilestoneBadges";
+import ReminderSettings from "@/components/ReminderSettings";
+import EncouragementCard from "@/components/EncouragementCard";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
 
@@ -27,7 +31,7 @@ export default async function ProfilePage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, created_at")
+    .select("full_name, age, created_at")
     .eq("id", user.id)
     .maybeSingle();
 
@@ -39,12 +43,13 @@ export default async function ProfilePage() {
 
   const { data: comps } = await supabase
     .from("dhikr_completions")
-    .select("day, adhkar(category)");
+    .select("day, adhkar(category, repeat)");
 
+  type AdhkarJoin = { category: Category; repeat: number };
   const rows: CompletionRow[] = (comps ?? []).map(
-    (r: { day: string; adhkar: { category: Category } | { category: Category }[] | null }) => {
-      const cat = Array.isArray(r.adhkar) ? r.adhkar[0]?.category : r.adhkar?.category;
-      return { day: r.day, category: cat ?? "morning" };
+    (r: { day: string; adhkar: AdhkarJoin | AdhkarJoin[] | null }) => {
+      const a = Array.isArray(r.adhkar) ? r.adhkar[0] : r.adhkar;
+      return { day: r.day, category: a?.category ?? "morning", repeat: a?.repeat ?? 1 };
     }
   );
 
@@ -71,7 +76,10 @@ export default async function ProfilePage() {
             {profile?.full_name || t("profile.noName")}
           </h1>
           <p className="truncate text-sm text-[var(--muted)]">{user.email}</p>
-          <p className="mt-1 text-xs text-[var(--muted)]">{t("profile.memberSince")}: {memberSince}</p>
+          <p className="mt-1 text-xs text-[var(--muted)]">
+            {t("profile.memberSince")}: {memberSince}
+            {typeof profile?.age === "number" ? ` · ${t("auth.age")}: ${profile.age}` : ""}
+          </p>
           <div className="mt-3">
             <ProfileEditor initialName={profile?.full_name || ""} />
           </div>
@@ -87,11 +95,44 @@ export default async function ProfilePage() {
         <StatCard label={t("profile.totalAdhkar")} value={`${stats.totalCompletions}`} icon="📿" />
       </div>
 
+      {/* إحصاءة «واو»: مجموع مرّات التسبيح */}
+      <div className="mt-3 flex items-center justify-center gap-3 rounded-2xl border border-[var(--border)] bg-gradient-to-l from-[var(--done)] to-[var(--card)] p-5 text-center">
+        <span className="text-3xl">📿</span>
+        <div>
+          <div className="text-3xl font-bold text-[var(--accent-strong)]">
+            {stats.totalRepetitions.toLocaleString(lang)}
+          </div>
+          <div className="text-sm text-[var(--muted)]">{t("profile.totalReps")}</div>
+        </div>
+      </div>
+
       <p className="mt-6 rounded-2xl border border-[var(--border)] bg-[var(--done)] p-4 text-center text-[var(--foreground)]">
         {stats.currentStreak > 0
           ? t("profile.motivateOn", { n: stats.currentStreak })
           : t("profile.motivateOff")}
       </p>
+
+      {/* حديقة الأذكار */}
+      <div className="mt-8">
+        <Garden stats={stats} t={t} lang={lang} />
+      </div>
+
+      {/* المكافآت والأوسمة */}
+      <div className="mt-8">
+        <MilestoneBadges stats={stats} t={t} lang={lang} />
+      </div>
+
+      {/* تعلّم واغتنم: سنّة + حديث */}
+      <h2 className="mb-3 mt-8 text-lg font-bold text-[var(--foreground)]">{t("profile.learn")}</h2>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <EncouragementCard kind="sunnah" />
+        <EncouragementCard kind="hadith" />
+      </div>
+
+      {/* التذكيرات */}
+      <div className="mt-8">
+        <ReminderSettings />
+      </div>
 
       {/* الخريطة الحرارية */}
       <div className="mt-8">

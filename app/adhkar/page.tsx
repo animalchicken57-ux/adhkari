@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import AdhkarTracker from "@/components/AdhkarTracker";
+import EncouragementCard from "@/components/EncouragementCard";
 import type { Adhkar } from "@/lib/types";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
@@ -27,6 +28,9 @@ export default async function AdhkarPage() {
       <div className="mb-6 text-center">
         <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("adhkar.title")}</h1>
         <p className="mt-1 text-[var(--muted)]">{t("adhkar.subtitle")}</p>
+      </div>
+      <div className="mb-6">
+        <EncouragementCard kind="motivation" />
       </div>
       <AdhkarTracker adhkar={(adhkar ?? []) as Adhkar[]} userId={user.id} />
     </div>
