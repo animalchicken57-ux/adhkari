@@ -180,6 +180,12 @@ const ar: Dict = {
 
   "nav.qibla": "القبلة",
   "nav.names": "الأسماء",
+  "nav.books": "كتب",
+
+  "books.title": "كتب إسلامية",
+  "books.subtitle": "مجموعة من أشهر الكتب الإسلامية النافعة مع نبذة عن كلٍّ منها.",
+  "books.author": "المؤلّف",
+  "books.note": "هذه الكتب من أشهر المراجع الإسلامية؛ ننصح بقراءتها بإشراف أهل العلم.",
 
   "qibla.title": "بوصلة القبلة",
   "qibla.subtitle": "وجّه جهازك لمعرفة اتجاه القبلة.",
@@ -418,6 +424,12 @@ const en: Dict = {
 
   "nav.qibla": "Qibla",
   "nav.names": "Names",
+  "nav.books": "Books",
+
+  "books.title": "Islamic Books",
+  "books.subtitle": "A selection of well-known, beneficial Islamic books with a short note on each.",
+  "books.author": "Author",
+  "books.note": "These are among the most renowned Islamic references; we recommend reading them under the guidance of scholars.",
 
   "qibla.title": "Qibla Compass",
   "qibla.subtitle": "Point your device to find the Qibla direction.",
