@@ -44,12 +44,7 @@ export default function FunFactsPage() {
             </p>
           </>
         ) : (
-          <>
-            <div className="text-6xl" aria-hidden>
-              🎁
-            </div>
-            <p className="mt-4 text-lg text-[var(--muted)]">{t("facts.empty")}</p>
-          </>
+          <p className="text-lg text-[var(--muted)]">{t("facts.empty")}</p>
         )}
       </div>
 

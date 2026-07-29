@@ -196,9 +196,9 @@ const ar: Dict = {
   "scriptures.revealedTo": "أُنزل على",
   "scriptures.note": "نؤمن بجميع الكتب السماوية كما أنزلها الله، ونتّبع القرآن الكريم فهو المحفوظ الباقي.",
 
-  "nav.facts": "معلومات طريفة",
+  "nav.facts": "المعلومات",
 
-  "facts.title": "معلومات لم تكن تعرفها",
+  "facts.title": "معلومات لم تكن تعرفها من قبل",
   "facts.subtitle": "اضغط الزرّ واكتشف معلومة طريفة عن الإسلام.",
   "facts.empty": "اضغط الزرّ لتظهر لك أوّل معلومة!",
   "facts.start": "أعطني معلومة ✨",
@@ -460,7 +460,7 @@ const en: Dict = {
 
   "nav.facts": "Fun Facts",
 
-  "facts.title": "Fun Facts You Never Knew",
+  "facts.title": "Fun Facts You Didn't Know Before",
   "facts.subtitle": "Tap the button and discover something surprising about Islam.",
   "facts.empty": "Tap the button to reveal your first fact!",
   "facts.start": "Give me a fact ✨",
