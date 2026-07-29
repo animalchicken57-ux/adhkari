@@ -187,6 +187,15 @@ const ar: Dict = {
   "books.author": "المؤلّف",
   "books.note": "هذه الكتب من أشهر المراجع الإسلامية؛ ننصح بقراءتها بإشراف أهل العلم.",
 
+  "nav.scriptures": "الكتب السماوية",
+
+  "scriptures.title": "الكتب السماوية",
+  "scriptures.subtitle": "الكتب الخمسة التي أنزلها الله على أنبيائه.",
+  "scriptures.intro":
+    "الإيمان بالكتب ركنٌ من أركان الإيمان الستّة؛ نؤمن بأنّ الله أنزل كتبًا على رسله هدًى للناس، وأنّ القرآن الكريم خاتمها والمهيمن عليها.",
+  "scriptures.revealedTo": "أُنزل على",
+  "scriptures.note": "نؤمن بجميع الكتب السماوية كما أنزلها الله، ونتّبع القرآن الكريم فهو المحفوظ الباقي.",
+
   "qibla.title": "بوصلة القبلة",
   "qibla.subtitle": "وجّه جهازك لمعرفة اتجاه القبلة.",
   "qibla.enable": "تفعيل البوصلة",
@@ -430,6 +439,15 @@ const en: Dict = {
   "books.subtitle": "A selection of well-known, beneficial Islamic books with a short note on each.",
   "books.author": "Author",
   "books.note": "These are among the most renowned Islamic references; we recommend reading them under the guidance of scholars.",
+
+  "nav.scriptures": "Scriptures",
+
+  "scriptures.title": "The Revealed Books",
+  "scriptures.subtitle": "The five scriptures Allah sent down upon His prophets.",
+  "scriptures.intro":
+    "Belief in the revealed Books is one of the six pillars of faith. We believe Allah sent down Books to His messengers as guidance for humanity, and that the Noble Qur'an is the last of them and the criterion over them.",
+  "scriptures.revealedTo": "Revealed to",
+  "scriptures.note": "We believe in all the revealed Books as Allah sent them down, and we follow the Noble Qur'an, the one preserved and remaining.",
 
   "qibla.title": "Qibla Compass",
   "qibla.subtitle": "Point your device to find the Qibla direction.",
