@@ -196,6 +196,15 @@ const ar: Dict = {
   "scriptures.revealedTo": "أُنزل على",
   "scriptures.note": "نؤمن بجميع الكتب السماوية كما أنزلها الله، ونتّبع القرآن الكريم فهو المحفوظ الباقي.",
 
+  "nav.facts": "معلومات طريفة",
+
+  "facts.title": "معلومات لم تكن تعرفها",
+  "facts.subtitle": "اضغط الزرّ واكتشف معلومة طريفة عن الإسلام.",
+  "facts.empty": "اضغط الزرّ لتظهر لك أوّل معلومة!",
+  "facts.start": "أعطني معلومة ✨",
+  "facts.again": "معلومة أخرى ✨",
+  "facts.counter": "اكتشفت",
+
   "qibla.title": "بوصلة القبلة",
   "qibla.subtitle": "وجّه جهازك لمعرفة اتجاه القبلة.",
   "qibla.enable": "تفعيل البوصلة",
@@ -448,6 +457,15 @@ const en: Dict = {
     "Belief in the revealed Books is one of the six pillars of faith. We believe Allah sent down Books to His messengers as guidance for humanity, and that the Noble Qur'an is the last of them and the criterion over them.",
   "scriptures.revealedTo": "Revealed to",
   "scriptures.note": "We believe in all the revealed Books as Allah sent them down, and we follow the Noble Qur'an, the one preserved and remaining.",
+
+  "nav.facts": "Fun Facts",
+
+  "facts.title": "Fun Facts You Never Knew",
+  "facts.subtitle": "Tap the button and discover something surprising about Islam.",
+  "facts.empty": "Tap the button to reveal your first fact!",
+  "facts.start": "Give me a fact ✨",
+  "facts.again": "Another one ✨",
+  "facts.counter": "Discovered",
 
   "qibla.title": "Qibla Compass",
   "qibla.subtitle": "Point your device to find the Qibla direction.",
