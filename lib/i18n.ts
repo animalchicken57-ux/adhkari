@@ -197,6 +197,31 @@ const ar: Dict = {
   "scriptures.note": "نؤمن بجميع الكتب السماوية كما أنزلها الله، ونتّبع القرآن الكريم فهو المحفوظ الباقي.",
 
   "nav.facts": "المعلومات",
+  "home.explore": "تصفّح أقسام التطبيق",
+  "nav.prophets": "قصص الأنبياء",
+  "nav.ramadan": "رمضان",
+  "nav.menu": "القائمة",
+  "nav.close": "إغلاق",
+
+  "prophets.title": "قصص الأنبياء",
+  "prophets.subtitle": "نبذة عن أنبياء الله وأبرز ما نتعلّمه من سِيَرهم.",
+  "prophets.lesson": "الدرس",
+  "prophets.note": "أنبياء الله كثير، وهؤلاء من أشهر من قصّ الله علينا خبرهم في القرآن.",
+
+  "ramadan.title": "كم بقي على رمضان؟",
+  "ramadan.subtitle": "عدّاد تنازلي حتى أوّل يوم من شهر رمضان المبارك.",
+  "ramadan.loading": "جارِ الحساب...",
+  "ramadan.remaining": "المتبقّي على رمضان",
+  "ramadan.here": "رمضان مبارك! 🎉",
+  "ramadan.dayOf": "نحن اليوم في اليوم",
+  "ramadan.days": "يوم",
+  "ramadan.hours": "ساعة",
+  "ramadan.minutes": "دقيقة",
+  "ramadan.seconds": "ثانية",
+  "ramadan.todayIs": "التاريخ الهجري اليوم",
+  "ramadan.hijri": "هـ",
+  "ramadan.note":
+    "الحساب بتقويم أم القرى، وقد يختلف بدء الشهر يومًا حسب رؤية الهلال في بلدك.",
 
   "facts.title": "معلومات لم تكن تعرفها من قبل",
   "facts.subtitle": "اضغط الزرّ واكتشف معلومة طريفة عن الإسلام.",
@@ -459,6 +484,31 @@ const en: Dict = {
   "scriptures.note": "We believe in all the revealed Books as Allah sent them down, and we follow the Noble Qur'an, the one preserved and remaining.",
 
   "nav.facts": "Fun Facts",
+  "home.explore": "Explore the app",
+  "nav.prophets": "Prophets",
+  "nav.ramadan": "Ramadan",
+  "nav.menu": "Menu",
+  "nav.close": "Close",
+
+  "prophets.title": "Stories of the Prophets",
+  "prophets.subtitle": "A short account of Allah's prophets and what their lives teach us.",
+  "prophets.lesson": "Lesson",
+  "prophets.note": "Allah's prophets were many; these are among the best known whose accounts He related to us in the Qur'an.",
+
+  "ramadan.title": "How Long Until Ramadan?",
+  "ramadan.subtitle": "A live countdown to the first day of the blessed month.",
+  "ramadan.loading": "Calculating...",
+  "ramadan.remaining": "Time remaining until Ramadan",
+  "ramadan.here": "Ramadan Mubarak! 🎉",
+  "ramadan.dayOf": "Today is day",
+  "ramadan.days": "days",
+  "ramadan.hours": "hours",
+  "ramadan.minutes": "minutes",
+  "ramadan.seconds": "seconds",
+  "ramadan.todayIs": "Today's Hijri date",
+  "ramadan.hijri": "AH",
+  "ramadan.note":
+    "Based on the Umm al-Qura calendar; the start of the month may differ by a day depending on the moon sighting where you live.",
 
   "facts.title": "Fun Facts You Didn't Know Before",
   "facts.subtitle": "Tap the button and discover something surprising about Islam.",

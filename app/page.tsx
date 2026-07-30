@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getDailyItem } from "@/lib/daily";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
+import ExploreGrid from "@/components/ExploreGrid";
 
 export default async function Home() {
   const t = getT(await getLang());
@@ -73,6 +74,14 @@ export default async function Home() {
         <Feature icon="📊" title={t("home.f3t")} text={t("home.f3d")} />
       </section>
 
+      {/* كل أقسام التطبيق في مكان واحد */}
+      <section className="pb-12">
+        <h2 className="mb-4 text-center text-2xl font-bold text-[var(--foreground)]">
+          {t("home.explore")}
+        </h2>
+        <ExploreGrid />
+      </section>
+
       <section className="mb-16 rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 text-center">
         <h2 className="text-2xl font-bold text-[var(--foreground)]">
           {t("home.allInOne")}
@@ -90,7 +99,7 @@ export default async function Home() {
 
 function Feature({ icon, title, text }: { icon: string; title: string; text: string }) {
   return (
-    <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 text-center">
+    <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
       <div className="text-3xl">{icon}</div>
       <h3 className="mt-3 font-bold text-[var(--foreground)]">{title}</h3>
       <p className="mt-1 text-sm text-[var(--muted)]">{text}</p>

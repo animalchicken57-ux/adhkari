@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import ThemeToggle from "@/components/ThemeToggle";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import NavMenu from "@/components/NavMenu";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
 
@@ -39,19 +40,7 @@ export default async function Navbar() {
           <LanguageSwitcher />
         </div>
 
-        <div className="flex flex-wrap items-center justify-end gap-x-1 gap-y-1 text-sm sm:gap-x-2">
-          <Link href="/adhkar" className={linkCls}>{t("nav.adhkar")}</Link>
-          <Link href="/tasbih" className={linkCls}>{t("nav.tasbih")}</Link>
-          <Link href="/prayer-times" className={linkCls}>{t("nav.prayer")}</Link>
-          <Link href="/questions" className={linkCls}>{t("nav.ayahs")}</Link>
-          <Link href="/names" className={linkCls}>{t("nav.names")}</Link>
-          <Link href="/books" className={linkCls}>{t("nav.books")}</Link>
-          <Link href="/scriptures" className={linkCls}>{t("nav.scriptures")}</Link>
-          <Link href="/fun-facts" className={linkCls}>{t("nav.facts")}</Link>
-          <Link href="/qibla" className={linkCls}>{t("nav.qibla")}</Link>
-          <Link href="/profile" className={linkCls}>{t("nav.profile")}</Link>
-          <Link href="/support" className={linkCls}>{t("nav.support")}</Link>
-
+        <NavMenu>
           {userEmail ? (
             <form action="/auth/signout" method="post">
               <button type="submit" className={linkCls}>
@@ -61,12 +50,12 @@ export default async function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="rounded-lg bg-emerald-700 px-3 py-1 font-medium text-white hover:bg-emerald-800"
+              className="inline-block rounded-lg bg-emerald-700 px-3 py-1 font-medium text-white hover:bg-emerald-800"
             >
               {t("nav.login")}
             </Link>
           )}
-        </div>
+        </NavMenu>
       </nav>
     </header>
   );
