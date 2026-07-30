@@ -5,13 +5,12 @@ import { useT } from "@/components/LanguageProvider";
 
 type Hijri = { year: number; month: number; day: number };
 
-/** التاريخ الهجري ليوم معيّن حسب تقويم أم القرى */
+/** التاريخ الهجري ليوم معيّن حسب تقويم أم القرى (بتوقيت الجهاز) */
 function toHijri(d: Date): Hijri {
   const parts = new Intl.DateTimeFormat("en-u-ca-islamic-umalqura-nu-latn", {
     day: "numeric",
     month: "numeric",
     year: "numeric",
-    timeZone: "UTC",
   }).formatToParts(d);
   const get = (t: string) => Number(parts.find((p) => p.type === t)?.value ?? 0);
   return { year: get("year"), month: get("month"), day: get("day") };
@@ -19,18 +18,27 @@ function toHijri(d: Date): Hijri {
 
 const DAY = 86_400_000;
 
+/** منتصف ليل ذلك اليوم — حتى يعدّ التنازلي الساعات والدقائق لا الأيام فقط */
+function startOfDay(d: Date): Date {
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+}
+
 /** أوّل يوم من رمضان القادم (أو الحالي إن كنّا فيه) */
 function findRamadan(from: Date): { start: Date; inside: boolean } | null {
   const today = toHijri(from);
   if (today.month === 9) {
-    const start = new Date(from.getTime() - (today.day - 1) * DAY);
+    const start = startOfDay(from);
+    start.setDate(start.getDate() - (today.day - 1));
     return { start, inside: true };
   }
   // نبحث يومًا بيوم حتى نجد أوّل رمضان — أقل من سنة قمرية
+  const cursor = startOfDay(from);
   for (let i = 1; i <= 400; i++) {
-    const d = new Date(from.getTime() + i * DAY);
-    const h = toHijri(d);
-    if (h.month === 9 && h.day === 1) return { start: d, inside: false };
+    cursor.setDate(cursor.getDate() + 1);
+    const h = toHijri(cursor);
+    if (h.month === 9 && h.day === 1) {
+      return { start: new Date(cursor), inside: false };
+    }
   }
   return null;
 }
@@ -49,15 +57,19 @@ function Box({ value, label }: { value: number; label: string }) {
 export default function RamadanPage() {
   const t = useT();
   const [now, setNow] = useState<Date | null>(null);
+  // نحسب موعد رمضان مرّة واحدة فقط — البحث مكلف ولا يتغيّر كل ثانية
+  const [target, setTarget] = useState<{ start: Date; inside: boolean } | null>(null);
 
   useEffect(() => {
-    setNow(new Date());
+    const start = new Date();
+    setNow(start);
+    setTarget(findRamadan(start));
     const id = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(id);
   }, []);
 
   // لا نحسب شيئًا قبل تحميل الصفحة في المتصفّح لتفادي اختلاف الخادم عن العميل
-  if (!now) {
+  if (!now || !target) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-8 text-center">
         <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("ramadan.title")}</h1>
@@ -67,11 +79,10 @@ export default function RamadanPage() {
   }
 
   const hijri = toHijri(now);
-  const found = findRamadan(now);
-  const inside = found?.inside ?? false;
-  const target = found?.start;
+  const inside = target?.inside ?? false;
 
-  const diff = target && !inside ? target.getTime() - now.getTime() : 0;
+  const diff =
+    target && !inside ? Math.max(0, target.start.getTime() - now.getTime()) : 0;
   const days = Math.floor(diff / DAY);
   const hours = Math.floor((diff % DAY) / 3_600_000);
   const minutes = Math.floor((diff % 3_600_000) / 60_000);
@@ -107,6 +118,14 @@ export default function RamadanPage() {
               <Box value={minutes} label={t("ramadan.minutes")} />
               <Box value={seconds} label={t("ramadan.seconds")} />
             </div>
+
+            {/* نفس العدّ مكتوبًا في سطر واحد */}
+            <p className="mt-5 text-lg font-medium leading-loose text-[var(--foreground)]">
+              {days} {t("ramadan.days")} {t("ramadan.and")} {hours}{" "}
+              {t("ramadan.hours")} {t("ramadan.and")} {minutes}{" "}
+              {t("ramadan.minutes")} {t("ramadan.and")} {seconds}{" "}
+              {t("ramadan.seconds")}
+            </p>
           </>
         )}
       </div>
