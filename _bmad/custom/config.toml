@@ -5,3 +5,10 @@
 #
 # [agents.bmad-agent-pm]
 # description = "Prefers short, bulleted PRDs over narrative drafts."
+
+# The installer left {output_folder} unsubstituted in _bmad/config.toml, which
+# created a directory literally named "{output_folder}". Pinned here so the
+# paths survive future installs.
+[modules.bmm]
+planning_artifacts = "{project-root}/_bmad-output/planning-artifacts"
+implementation_artifacts = "{project-root}/_bmad-output/implementation-artifacts"
