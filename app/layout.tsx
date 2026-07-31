@@ -21,11 +21,11 @@ const amiri = Amiri({
 });
 
 export const metadata: Metadata = {
-  title: "أذكاري · Adhkari — Morning & Evening Adhkar",
+  title: "أذكار المسلم · Adhkar Al Muslim — Morning & Evening Adhkar",
   description:
     "تطبيق يساعدك على المحافظة على أذكار الصباح والمساء بعدّاد تفاعلي، متابعة يومية، وسلاسل تحفيزية.",
   icons: { icon: "/icon-192.png", apple: "/icon-192.png" },
-  appleWebApp: { capable: true, title: "أذكاري", statusBarStyle: "default" },
+  appleWebApp: { capable: true, title: "أذكار المسلم", statusBarStyle: "default" },
 };
 
 export const viewport: Viewport = {

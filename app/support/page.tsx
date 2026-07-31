@@ -4,7 +4,7 @@ import SupportForm from "@/components/SupportForm";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
 
-export const metadata = { title: "الدعم والتواصل — أذكاري" };
+export const metadata = { title: "الدعم والتواصل — أذكار المسلم" };
 
 export default async function SupportPage() {
   const supabase = await createClient();

@@ -3,7 +3,7 @@ import { SCRIPTURES } from "@/lib/scriptures";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
 
-export const metadata = { title: "الكتب السماوية — أذكاري" };
+export const metadata = { title: "الكتب السماوية — أذكار المسلم" };
 
 export default async function ScripturesPage() {
   const lang = await getLang();

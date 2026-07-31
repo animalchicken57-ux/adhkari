@@ -12,7 +12,7 @@ export function dir(lang: Lang): "rtl" | "ltr" {
 type Dict = Record<string, string>;
 
 const ar: Dict = {
-  brand: "أذكاري",
+  brand: "أذكار المسلم",
   "nav.adhkar": "الأذكار",
   "nav.tasbih": "المسبحة",
   "nav.prayer": "الصلاة",
@@ -21,14 +21,14 @@ const ar: Dict = {
   "nav.support": "الدعم",
   "nav.login": "دخول",
   "nav.logout": "خروج",
-  footer: "أذكاري — رفيقك اليومي لأذكار الصباح والمساء",
+  footer: "أذكار المسلم — رفيقك اليومي لأذكار الصباح والمساء",
   "cat.morning": "أذكار الصباح",
   "cat.evening": "أذكار المساء",
 
   "home.eyebrow": "🕌 رفيقك اليومي لأذكار الصباح والمساء",
   "home.title": "لا تفوّت أذكارك بعد اليوم",
   "home.desc":
-    "كثيرٌ منّا ينسى أذكار الصباح والمساء أو يفقد المتابعة. «أذكاري» يمنحك عدّادًا تفاعليًا، ومتابعة يومية، وسلاسل تحفيزية تجعل الوِرد عادة راسخة.",
+    "كثيرٌ منّا ينسى أذكار الصباح والمساء أو يفقد المتابعة. «أذكار المسلم» يمنحك عدّادًا تفاعليًا، ومتابعة يومية، وسلاسل تحفيزية تجعل الوِرد عادة راسخة.",
   "home.ctaOpen": "افتح أذكار اليوم",
   "home.ctaStart": "ابدأ الآن مجانًا",
   "home.ctaLogin": "تسجيل الدخول",
@@ -198,6 +198,49 @@ const ar: Dict = {
 
   "nav.facts": "المعلومات",
   "home.explore": "تصفّح أقسام التطبيق",
+  "nav.duas": "أدعية",
+  "nav.share": "شارك",
+  "nav.about": "عن التطبيق",
+
+  "duas.title": "أدعية لكل موقف",
+  "duas.subtitle": "أدعية من القرآن والسنّة لمواقف يومك، مع معناها.",
+  "duas.note": "الدعاء مخّ العبادة؛ ادعُ بقلبٍ حاضر وأنت موقن بالإجابة.",
+
+  "share.title": "شارك التطبيق",
+  "share.subtitle": "دلّ غيرك على الخير، فلك مثل أجره.",
+  "share.scan": "امسح الرمز بكاميرا هاتفك لفتح التطبيق",
+  "share.button": "مشاركة التطبيق",
+  "share.copy": "نسخ الرابط",
+  "share.copied": "تم نسخ الرابط!",
+  "share.message": "جرّب تطبيق أذكار المسلم — أذكار الصباح والمساء وأكثر:",
+  "share.hadith": "مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ",
+  "share.hadithRef": "رواه مسلم",
+
+  "about.title": "عن التطبيق",
+  "about.subtitle": "أذكار المسلم — رفيقك اليومي في الذِّكر والتعلّم.",
+  "about.whyTitle": "لماذا هذا التطبيق؟",
+  "about.why":
+    "كثيرٌ منّا ينوي المحافظة على أذكار الصباح والمساء ثم ينساها أو ينقطع عنها. صُنع «أذكار المسلم» ليحوّل هذه النيّة إلى عادة: عدّاد يحفظ مكانك، وسلسلة يومية تحفّزك على الاستمرار، ومعها أبواب أخرى تزيدك قربًا وعلمًا — من أوقات الصلاة والقبلة إلى قصص الأنبياء وأسماء الله الحسنى.",
+  "about.whatTitle": "ماذا يوجد في التطبيق؟",
+  "about.s1": "أذكار الصباح والمساء بعدّاد لكل ذكر وحفظ تلقائي لتقدّمك.",
+  "about.s2": "مسبحة رقمية بأهداف وجولات واهتزاز عند الاكتمال.",
+  "about.s3": "أوقات الصلاة حسب موقعك مع الصلاة القادمة.",
+  "about.s4": "معاني آيات القرآن مع التفسير الميسّر وإمكانية الاستماع.",
+  "about.s5": "أسماء الله الحسنى التسعة والتسعون ومعانيها.",
+  "about.s6": "قصص الأنبياء وأبرز الدروس المستفادة من سِيَرهم.",
+  "about.s7": "عدّاد تنازلي حتى أوّل يوم من رمضان مع التاريخ الهجري.",
+  "about.s8": "أشهر الكتب الإسلامية مع نبذة عن كل كتاب.",
+  "about.s9": "الكتب السماوية الخمسة التي أنزلها الله على أنبيائه.",
+  "about.s10": "معلومات طريفة عن الإسلام بضغطة زر.",
+  "about.s11": "أدعية مختارة لمواقف يومك مع معانيها.",
+  "about.s12": "بوصلة تحدّد اتجاه القبلة من مكانك.",
+  "about.techTitle": "كيف بُني؟",
+  "about.tech":
+    "تطبيق ويب حديث يعمل على الهاتف والحاسوب، ويمكن تثبيته على شاشة هاتفك ليعمل كتطبيق مستقلّ. يدعم العربية والإنجليزية، والوضعين الفاتح والداكن، ويحفظ بياناتك في حساب آمن.",
+  "about.duaText": "رَبَّنَا تَقَبَّلْ مِنَّا ۖ إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ",
+  "about.duaRef": "البقرة: ١٢٧",
+  "about.thanks":
+    "نسأل الله أن ينفع بهذا العمل، وأن يجعله خالصًا لوجهه الكريم. وإن وجدت خطأً أو لديك اقتراح فراسلنا من صفحة الدعم.",
   "nav.prophets": "قصص الأنبياء",
   "nav.ramadan": "رمضان",
   "nav.menu": "القائمة",
@@ -287,7 +330,7 @@ const ar: Dict = {
   "reminder.eveningBody": "اختم يومك بذكر الله. افتح أذكار المساء 🌿",
   "reminder.onTitle": "تم تفعيل التذكيرات ✅",
   "reminder.onBody": "سنذكّرك بأذكارك في أوقاتك المختارة بإذن الله.",
-  "reminder.testTitle": "أذكاري 🕌",
+  "reminder.testTitle": "أذكار المسلم 🕌",
   "reminder.testBody": "هكذا سيصلك التذكير. لا تنسَ وردك اليوم 🌿",
 
   "lang.choose": "اختر لغتك",
@@ -295,7 +338,7 @@ const ar: Dict = {
 };
 
 const en: Dict = {
-  brand: "Adhkari",
+  brand: "Adhkar Al Muslim",
   "nav.adhkar": "Adhkar",
   "nav.tasbih": "Tasbih",
   "nav.prayer": "Prayer",
@@ -304,14 +347,14 @@ const en: Dict = {
   "nav.support": "Support",
   "nav.login": "Login",
   "nav.logout": "Logout",
-  footer: "Adhkari — your daily companion for morning & evening adhkar",
+  footer: "Adhkar Al Muslim — your daily companion for morning & evening adhkar",
   "cat.morning": "Morning Adhkar",
   "cat.evening": "Evening Adhkar",
 
   "home.eyebrow": "🕌 Your daily companion for morning & evening adhkar",
   "home.title": "Never miss your adhkar again",
   "home.desc":
-    "Many of us forget the morning & evening adhkar or lose the habit. Adhkari gives you an interactive counter, daily tracking, and motivating streaks that turn your wird into a lasting habit.",
+    "Many of us forget the morning & evening adhkar or lose the habit. Adhkar Al Muslim gives you an interactive counter, daily tracking, and motivating streaks that turn your wird into a lasting habit.",
   "home.ctaOpen": "Open today's adhkar",
   "home.ctaStart": "Start now — free",
   "home.ctaLogin": "Log in",
@@ -486,6 +529,49 @@ const en: Dict = {
 
   "nav.facts": "Fun Facts",
   "home.explore": "Explore the app",
+  "nav.duas": "Du'as",
+  "nav.share": "Share",
+  "nav.about": "About",
+
+  "duas.title": "Du'as for Every Moment",
+  "duas.subtitle": "Supplications from the Qur'an and Sunnah for your day, with their meanings.",
+  "duas.note": "Du'a is the essence of worship — call upon Allah with a present heart, certain of an answer.",
+
+  "share.title": "Share the App",
+  "share.subtitle": "Point someone toward good and you share in its reward.",
+  "share.scan": "Scan the code with your phone camera to open the app",
+  "share.button": "Share the app",
+  "share.copy": "Copy the link",
+  "share.copied": "Link copied!",
+  "share.message": "Try Adhkar Al Muslim — morning & evening adhkar and much more:",
+  "share.hadith": "Whoever guides someone to good has a reward like the one who does it.",
+  "share.hadithRef": "Reported by Muslim",
+
+  "about.title": "About the App",
+  "about.subtitle": "Adhkar Al Muslim — your daily companion in remembrance and learning.",
+  "about.whyTitle": "Why this app?",
+  "about.why":
+    "Many of us intend to keep up the morning and evening adhkar, then forget or fall out of the habit. Adhkar Al Muslim was built to turn that intention into a routine: a counter that remembers your place, a daily streak to keep you going, and alongside it other doors to draw you closer and teach you more — from prayer times and the qibla to the stories of the prophets and the names of Allah.",
+  "about.whatTitle": "What's inside?",
+  "about.s1": "Morning and evening adhkar with a counter for each and automatic saving.",
+  "about.s2": "A digital tasbih with targets, rounds, and a buzz on completion.",
+  "about.s3": "Prayer times for your location, with the next prayer highlighted.",
+  "about.s4": "Meanings of Qur'anic verses with simplified tafsir and audio recitation.",
+  "about.s5": "The ninety-nine beautiful names of Allah and their meanings.",
+  "about.s6": "Stories of the prophets and the lessons drawn from their lives.",
+  "about.s7": "A live countdown to the first day of Ramadan, with today's Hijri date.",
+  "about.s8": "The best-known Islamic books with a short note on each.",
+  "about.s9": "The five revealed scriptures Allah sent down to His prophets.",
+  "about.s10": "Surprising facts about Islam at the tap of a button.",
+  "about.s11": "Selected supplications for moments in your day, with their meanings.",
+  "about.s12": "A compass that points to the qibla from wherever you are.",
+  "about.techTitle": "How it was built",
+  "about.tech":
+    "A modern web app that works on phone and computer, and can be installed on your home screen to run like a native app. It supports Arabic and English, light and dark modes, and keeps your data in a secure account.",
+  "about.duaText": "رَبَّنَا تَقَبَّلْ مِنَّا ۖ إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ",
+  "about.duaRef": "Al-Baqarah 2:127 — “Our Lord, accept this from us. Indeed You are the Hearing, the Knowing.”",
+  "about.thanks":
+    "We ask Allah to make this work beneficial and sincerely for His sake. If you spot a mistake or have a suggestion, write to us from the support page.",
   "nav.prophets": "Prophets",
   "nav.ramadan": "Ramadan",
   "nav.menu": "Menu",
@@ -576,7 +662,7 @@ const en: Dict = {
   "reminder.eveningBody": "End your day with the remembrance of Allah 🌿",
   "reminder.onTitle": "Reminders enabled ✅",
   "reminder.onBody": "We'll remind you of your adhkar at your chosen times, insha'Allah.",
-  "reminder.testTitle": "Adhkari 🕌",
+  "reminder.testTitle": "Adhkar Al Muslim 🕌",
   "reminder.testBody": "This is how your reminder will look. Don't forget your wird today 🌿",
 
   "lang.choose": "Choose your language",

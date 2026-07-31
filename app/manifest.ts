@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "أذكاري · Adhkari",
-    short_name: "أذكاري",
+    name: "أذكار المسلم · Adhkar Al Muslim",
+    short_name: "أذكار المسلم",
     description: "متتبّع أذكار الصباح والمساء مع مسبحة وأوقات الصلاة والقبلة.",
     start_url: "/",
     display: "standalone",

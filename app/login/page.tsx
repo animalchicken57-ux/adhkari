@@ -1,6 +1,6 @@
 import AuthForm from "@/components/AuthForm";
 
-export const metadata = { title: "تسجيل الدخول — أذكاري" };
+export const metadata = { title: "تسجيل الدخول — أذكار المسلم" };
 // تُصيَّر عند الطلب (تتفادى فشل البناء إن غابت متغيّرات البيئة أثناء الـ prerender)
 export const dynamic = "force-dynamic";
 

@@ -3,7 +3,7 @@ import { PROPHETS } from "@/lib/prophets";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
 
-export const metadata = { title: "قصص الأنبياء — أذكاري" };
+export const metadata = { title: "قصص الأنبياء — أذكار المسلم" };
 
 export default async function ProphetsPage() {
   const lang = await getLang();

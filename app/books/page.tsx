@@ -2,7 +2,7 @@ import { BOOKS, tr } from "@/lib/books";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
 
-export const metadata = { title: "كتب إسلامية — أذكاري" };
+export const metadata = { title: "كتب إسلامية — أذكار المسلم" };
 
 export default async function BooksPage() {
   const lang = await getLang();

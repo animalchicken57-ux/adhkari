@@ -6,7 +6,7 @@ import type { Adhkar } from "@/lib/types";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
 
-export const metadata = { title: "الأذكار — أذكاري" };
+export const metadata = { title: "الأذكار — أذكار المسلم" };
 
 export default async function AdhkarPage() {
   const supabase = await createClient();

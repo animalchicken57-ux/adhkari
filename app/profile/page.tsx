@@ -11,7 +11,7 @@ import EncouragementCard from "@/components/EncouragementCard";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
 
-export const metadata = { title: "ملفّي — أذكاري" };
+export const metadata = { title: "ملفّي — أذكار المسلم" };
 
 function todayStr(): string {
   const d = new Date();

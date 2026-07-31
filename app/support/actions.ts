@@ -41,7 +41,7 @@ export async function submitTicket(
   try {
     await fetch(`https://ntfy.sh/${topic}`, {
       method: "POST",
-      headers: { Title: "New Adhkari support message", Tags: "envelope" },
+      headers: { Title: "New Adhkar Al Muslim support message", Tags: "envelope" },
       body: `[${category}] ${subject}\n${message}\n— ${user.email}`,
     });
   } catch {
