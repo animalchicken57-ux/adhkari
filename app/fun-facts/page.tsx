@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useLang } from "@/components/LanguageProvider";
 import { tr } from "@/lib/books";
 import { FUN_FACTS } from "@/lib/funfacts";
+import PageHeader from "@/components/PageHeader";
 
 export default function FunFactsPage() {
   const { lang, t } = useLang();
@@ -25,14 +26,11 @@ export default function FunFactsPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
-      <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("facts.title")}</h1>
-        <p className="mt-1 text-[var(--muted)]">{t("facts.subtitle")}</p>
-      </div>
+      <PageHeader icon="💡" title={t("facts.title")} subtitle={t("facts.subtitle")} />
 
       <div
         key={spin}
-        className="animate-[fadeIn_.35s_ease] rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8 text-center shadow-sm"
+        className="card-soft animate-[fadeIn_.35s_ease] p-8 text-center"
       >
         {fact ? (
           <>

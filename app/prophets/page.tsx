@@ -2,6 +2,7 @@ import { tr } from "@/lib/books";
 import { PROPHETS } from "@/lib/prophets";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
+import PageHeader from "@/components/PageHeader";
 
 export const metadata = { title: "قصص الأنبياء — أذكار المسلم" };
 
@@ -11,17 +12,11 @@ export default async function ProphetsPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
-      <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("prophets.title")}</h1>
-        <p className="mt-1 text-[var(--muted)]">{t("prophets.subtitle")}</p>
-      </div>
+      <PageHeader icon="🌟" title={t("prophets.title")} subtitle={t("prophets.subtitle")} />
 
       <div className="space-y-4">
         {PROPHETS.map((p) => (
-          <article
-            key={p.id}
-            className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-sm transition hover:shadow-md"
-          >
+          <article key={p.id} className="card-soft overflow-hidden">
             <div className="flex items-center gap-3 border-b border-[var(--border)] bg-[var(--hover)] px-5 py-3">
               <span className="text-3xl" aria-hidden>
                 {p.emoji}

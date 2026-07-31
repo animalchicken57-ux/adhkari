@@ -2,6 +2,7 @@ import { tr } from "@/lib/books";
 import { SCRIPTURES } from "@/lib/scriptures";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
+import PageHeader from "@/components/PageHeader";
 
 export const metadata = { title: "الكتب السماوية — أذكار المسلم" };
 
@@ -11,12 +12,13 @@ export default async function ScripturesPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
-      <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("scriptures.title")}</h1>
-        <p className="mt-1 text-[var(--muted)]">{t("scriptures.subtitle")}</p>
-      </div>
+      <PageHeader
+        icon="📜"
+        title={t("scriptures.title")}
+        subtitle={t("scriptures.subtitle")}
+      />
 
-      <p className="mb-6 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 leading-relaxed text-[var(--foreground)]">
+      <p className="card-soft mb-6 p-4 leading-relaxed text-[var(--foreground)]">
         {t("scriptures.intro")}
       </p>
 
@@ -24,7 +26,7 @@ export default async function ScripturesPage() {
         {SCRIPTURES.map((s, i) => (
           <li
             key={s.id}
-            className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 shadow-sm"
+            className="card-soft p-5"
           >
             <div className="flex gap-4">
               <div className="shrink-0 text-4xl" aria-hidden>

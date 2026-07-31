@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useT } from "@/components/LanguageProvider";
+import PageHeader from "@/components/PageHeader";
 
 type Hijri = { year: number; month: number; day: number };
 
@@ -45,8 +46,8 @@ function findRamadan(from: Date): { start: Date; inside: boolean } | null {
 
 function Box({ value, label }: { value: number; label: string }) {
   return (
-    <div className="min-w-[72px] rounded-2xl border border-[var(--border)] bg-[var(--card)] px-3 py-4 text-center shadow-sm">
-      <div className="text-3xl font-bold tabular-nums text-[var(--accent-strong)]">
+    <div className="card-soft min-w-[72px] px-3 py-4 text-center">
+      <div className="tabular text-3xl font-bold text-[var(--accent-strong)]">
         {String(value).padStart(2, "0")}
       </div>
       <div className="mt-1 text-xs text-[var(--muted)]">{label}</div>
@@ -90,12 +91,9 @@ export default function RamadanPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
-      <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("ramadan.title")}</h1>
-        <p className="mt-1 text-[var(--muted)]">{t("ramadan.subtitle")}</p>
-      </div>
+      <PageHeader icon="🌙" title={t("ramadan.title")} subtitle={t("ramadan.subtitle")} />
 
-      <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 text-center shadow-sm">
+      <div className="card-soft p-6 text-center">
         <div className="text-6xl" aria-hidden>
           🌙
         </div>
@@ -130,7 +128,7 @@ export default function RamadanPage() {
         )}
       </div>
 
-      <div className="mt-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 text-center shadow-sm">
+      <div className="card-soft mt-4 p-5 text-center">
         <p className="text-sm text-[var(--muted)]">{t("ramadan.todayIs")}</p>
         <p className="mt-1 text-lg font-bold text-[var(--foreground)]">
           {hijri.day} / {hijri.month} / {hijri.year} {t("ramadan.hijri")}

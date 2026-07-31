@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
+import PageHeader from "@/components/PageHeader";
 
 export const metadata = { title: "عن التطبيق — أذكار المسلم" };
 
@@ -24,17 +25,9 @@ export default async function AboutPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
-      <div className="mb-8 text-center">
-        <div className="text-6xl" aria-hidden>
-          🕌
-        </div>
-        <h1 className="mt-3 text-3xl font-bold text-[var(--foreground)]">
-          {t("about.title")}
-        </h1>
-        <p className="mt-1 text-[var(--muted)]">{t("about.subtitle")}</p>
-      </div>
+      <PageHeader icon="🕌" title={t("about.title")} subtitle={t("about.subtitle")} />
 
-      <section className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm">
+      <section className="card-soft p-6">
         <h2 className="text-xl font-bold text-[var(--foreground)]">
           {t("about.whyTitle")}
         </h2>
@@ -50,7 +43,7 @@ export default async function AboutPage() {
             <Link
               key={s.href}
               href={s.href}
-              className="flex gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-[var(--accent-strong)] hover:shadow-md"
+              className="card-soft flex gap-3 p-4"
             >
               <span className="text-2xl" aria-hidden>
                 {s.icon}
@@ -68,7 +61,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="mt-6 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm">
+      <section className="card-soft mt-6 p-6">
         <h2 className="text-xl font-bold text-[var(--foreground)]">
           {t("about.techTitle")}
         </h2>
@@ -87,7 +80,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="mt-6 rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 text-center shadow-sm">
+      <section className="card-soft mt-6 p-8 text-center">
         <div className="text-4xl" aria-hidden>
           🤲
         </div>

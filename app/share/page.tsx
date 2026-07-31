@@ -3,6 +3,7 @@ import QRCode from "qrcode";
 import ShareButtons from "@/components/ShareButtons";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
+import PageHeader from "@/components/PageHeader";
 
 export const metadata = { title: "شارك التطبيق — أذكار المسلم" };
 
@@ -24,12 +25,9 @@ export default async function SharePage() {
 
   return (
     <div className="mx-auto max-w-xl px-4 py-8">
-      <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("share.title")}</h1>
-        <p className="mt-1 text-[var(--muted)]">{t("share.subtitle")}</p>
-      </div>
+      <PageHeader icon="📤" title={t("share.title")} subtitle={t("share.subtitle")} />
 
-      <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 text-center shadow-sm">
+      <div className="card-soft p-6 text-center">
         <div
           className="mx-auto w-[220px] rounded-2xl bg-white p-3 [&>svg]:h-full [&>svg]:w-full"
           dangerouslySetInnerHTML={{ __html: qr }}
@@ -46,7 +44,7 @@ export default async function SharePage() {
         <ShareButtons url={url} />
       </div>
 
-      <div className="mt-6 rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 text-center shadow-sm">
+      <div className="card-soft mt-6 p-8 text-center">
         <div className="text-4xl" aria-hidden>
           🌱
         </div>

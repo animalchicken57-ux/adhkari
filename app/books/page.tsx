@@ -1,6 +1,7 @@
 import { BOOKS, tr } from "@/lib/books";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
+import PageHeader from "@/components/PageHeader";
 
 export const metadata = { title: "كتب إسلامية — أذكار المسلم" };
 
@@ -10,17 +11,11 @@ export default async function BooksPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
-      <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">{t("books.title")}</h1>
-        <p className="mt-1 text-[var(--muted)]">{t("books.subtitle")}</p>
-      </div>
+      <PageHeader icon="📚" title={t("books.title")} subtitle={t("books.subtitle")} />
 
       <div className="space-y-4">
         {BOOKS.map((b) => (
-          <article
-            key={b.id}
-            className="flex gap-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 shadow-sm"
-          >
+          <article key={b.id} className="card-soft flex gap-4 p-5">
             <div className="shrink-0 text-4xl" aria-hidden>
               {b.icon}
             </div>
