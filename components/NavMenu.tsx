@@ -67,7 +67,7 @@ export default function NavMenu({ children }: { children: React.ReactNode }) {
   return (
     <>
       {/* شاشات واسعة: روابط ظاهرة */}
-      <div className="hidden items-center justify-end gap-x-1 text-sm lg:flex">
+      <div className="hidden flex-wrap items-center justify-center gap-x-1 gap-y-1 text-sm lg:flex">
         {NAV_ITEMS.map((it) => (
           <Link key={it.href} href={it.href} className={deskCls(it.href)}>
             {t(it.key)}

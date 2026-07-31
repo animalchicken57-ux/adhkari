@@ -30,17 +30,25 @@ export default async function Navbar() {
 
   return (
     <header className="sticky top-0 z-20 border-b border-[var(--border)] bg-[var(--background)]/80 backdrop-blur">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
-        <div className="flex items-center gap-1">
-          <Link href="/" className="flex items-center gap-2 font-bold text-[var(--accent-strong)]">
+      <nav className="mx-auto max-w-5xl px-4 py-3">
+        {/* الاسم في المنتصف، وأزرار الوضع واللغة على الجانب */}
+        <div className="relative flex items-center justify-center">
+          <div className="absolute start-0 flex items-center gap-1">
+            <ThemeToggle />
+            <LanguageSwitcher />
+          </div>
+
+          <Link
+            href="/"
+            className="flex items-center gap-2 font-bold text-[var(--accent-strong)]"
+          >
             <span className="text-2xl">🕌</span>
-            <span className="text-lg">{t("brand")}</span>
+            <span className="text-lg sm:text-xl">{t("brand")}</span>
           </Link>
-          <ThemeToggle />
-          <LanguageSwitcher />
         </div>
 
-        <NavMenu>
+        <div className="mt-2 flex justify-center">
+          <NavMenu>
           {userEmail ? (
             <form action="/auth/signout" method="post">
               <button type="submit" className={linkCls}>
@@ -54,8 +62,9 @@ export default async function Navbar() {
             >
               {t("nav.login")}
             </Link>
-          )}
-        </NavMenu>
+            )}
+          </NavMenu>
+        </div>
       </nav>
     </header>
   );
