@@ -3,6 +3,7 @@ import { DUAS } from "@/lib/duas";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
 import PageHeader from "@/components/PageHeader";
+import FavButton from "@/components/FavButton";
 
 export const metadata = { title: "أدعية — أذكار المسلم" };
 
@@ -21,7 +22,18 @@ export default async function DuasPage() {
               <span className="text-2xl" aria-hidden>
                 {d.icon}
               </span>
-              <h2 className="font-bold text-[var(--foreground)]">{tr(d.when, lang)}</h2>
+              <h2 className="min-w-0 flex-1 font-bold text-[var(--foreground)]">
+                {tr(d.when, lang)}
+              </h2>
+              <FavButton
+                kind="dua"
+                id={d.id}
+                title={tr(d.when, lang)}
+                body={d.arabic}
+                meta={tr(d.source, lang)}
+                icon={d.icon}
+                href="/duas"
+              />
             </div>
 
             <div className="px-5 py-5">

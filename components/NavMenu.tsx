@@ -19,6 +19,7 @@ export const NAV_ITEMS: NavItem[] = [
   { href: "/scriptures", key: "nav.scriptures", icon: "📜" },
   { href: "/fun-facts", key: "nav.facts", icon: "💡" },
   { href: "/duas", key: "nav.duas", icon: "🤲" },
+  { href: "/favourites", key: "nav.favourites", icon: "♥" },
   { href: "/qibla", key: "nav.qibla", icon: "🧭" },
   { href: "/share", key: "nav.share", icon: "📤" },
   { href: "/about", key: "nav.about", icon: "ℹ️" },

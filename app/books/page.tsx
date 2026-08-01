@@ -2,6 +2,7 @@ import { BOOKS, tr } from "@/lib/books";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
 import PageHeader from "@/components/PageHeader";
+import FavButton from "@/components/FavButton";
 
 export const metadata = { title: "كتب إسلامية — أذكار المسلم" };
 
@@ -26,6 +27,17 @@ export default async function BooksPage() {
                 </h2>
                 <span className="rounded-full bg-[var(--done)] px-2.5 py-0.5 text-xs font-medium text-[var(--accent-strong)]">
                   {tr(b.category, lang)}
+                </span>
+                <span className="ms-auto">
+                  <FavButton
+                    kind="book"
+                    id={b.id}
+                    title={tr(b.title, lang)}
+                    body={tr(b.desc, lang)}
+                    meta={tr(b.author, lang)}
+                    icon={b.icon}
+                    href="/books"
+                  />
                 </span>
               </div>
               <p className="mt-0.5 text-sm text-[var(--muted)]">

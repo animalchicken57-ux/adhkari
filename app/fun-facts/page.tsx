@@ -5,6 +5,7 @@ import { useLang } from "@/components/LanguageProvider";
 import { tr } from "@/lib/books";
 import { FUN_FACTS } from "@/lib/funfacts";
 import PageHeader from "@/components/PageHeader";
+import FavButton from "@/components/FavButton";
 
 export default function FunFactsPage() {
   const { lang, t } = useLang();
@@ -40,6 +41,16 @@ export default function FunFactsPage() {
             <p className="mt-4 text-lg leading-loose text-[var(--foreground)]">
               {tr(fact.text, lang)}
             </p>
+            <div className="mt-4 flex justify-center">
+              <FavButton
+                kind="fact"
+                id={fact.id}
+                title={t("nav.facts")}
+                body={tr(fact.text, lang)}
+                icon={fact.emoji}
+                href="/fun-facts"
+              />
+            </div>
           </>
         ) : (
           <p className="text-lg text-[var(--muted)]">{t("facts.empty")}</p>

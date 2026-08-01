@@ -1,6 +1,6 @@
 // خدمة عامل بسيطة لتمكين التثبيت والعمل دون اتصال (app shell)
-const CACHE = "adhkari-v5";
-const ASSETS = ["/", "/adhkar", "/tasbih", "/prayer-times", "/questions", "/names", "/prophets", "/ramadan", "/books", "/scriptures", "/fun-facts", "/duas", "/qibla", "/share", "/about", "/masjid-bg.jpg", "/icon-192.png", "/icon-512.png"];
+const CACHE = "adhkari-v6";
+const ASSETS = ["/", "/adhkar", "/tasbih", "/prayer-times", "/questions", "/names", "/prophets", "/ramadan", "/books", "/scriptures", "/fun-facts", "/duas", "/favourites", "/qibla", "/share", "/about", "/masjid-bg.jpg", "/icon-192.png", "/icon-512.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).catch(() => {}));

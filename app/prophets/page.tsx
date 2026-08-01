@@ -3,6 +3,7 @@ import { PROPHETS } from "@/lib/prophets";
 import { getLang } from "@/lib/lang-server";
 import { getT } from "@/lib/i18n";
 import PageHeader from "@/components/PageHeader";
+import FavButton from "@/components/FavButton";
 
 export const metadata = { title: "قصص الأنبياء — أذكار المسلم" };
 
@@ -26,6 +27,17 @@ export default async function ProphetsPage() {
                   {tr(p.name, lang)}
                 </h2>
                 <p className="text-sm text-[var(--accent-strong)]">{tr(p.title, lang)}</p>
+              </div>
+              <div className="ms-auto">
+                <FavButton
+                  kind="prophet"
+                  id={p.id}
+                  title={tr(p.name, lang)}
+                  body={tr(p.lesson, lang)}
+                  meta={tr(p.title, lang)}
+                  icon={p.emoji}
+                  href="/prophets"
+                />
               </div>
             </div>
 
