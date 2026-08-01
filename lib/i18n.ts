@@ -282,6 +282,11 @@ const ar: Dict = {
   "qibla.hint": "اسمح بالوصول للموقع والبوصلة، وأمسك الجهاز مستويًا.",
   "qibla.err": "تعذّر تحديد موقعك، فعّل خدمة الموقع.",
   "qibla.aligned": "أنت تواجه القبلة الآن ✅",
+  "qibla.heading": "اتجاه جهازك",
+  "qibla.northUp":
+    "بوصلة جهازك غير مفعّلة، لذا الشمال ثابت في أعلى الدائرة. وجّه أعلى الجهاز نحو الشمال ليصحّ اتجاه السهم، أو فعّل البوصلة.",
+  "qibla.denied":
+    "لم تُمنح إذن استخدام البوصلة. الشمال الآن ثابت في أعلى الدائرة — وجّه أعلى الجهاز نحو الشمال، أو اسمح بالوصول من إعدادات المتصفّح.",
   "qibla.kaaba": "الكعبة المشرّفة",
 
   "names.title": "أسماء الله الحسنى",
@@ -613,6 +618,11 @@ const en: Dict = {
   "qibla.hint": "Allow location & compass access, and hold the device flat.",
   "qibla.err": "Couldn't get your location, enable location services.",
   "qibla.aligned": "You are facing the Qibla now ✅",
+  "qibla.heading": "Your device is facing",
+  "qibla.northUp":
+    "Your device compass isn't active, so north is fixed at the top of the dial. Point the top of your device north for the arrow to be correct, or turn the compass on.",
+  "qibla.denied":
+    "Compass permission wasn't granted. North is fixed at the top of the dial — point the top of your device north, or allow access in your browser settings.",
   "qibla.kaaba": "The Holy Kaaba",
 
   "names.title": "The 99 Names of Allah",
