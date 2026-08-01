@@ -95,10 +95,13 @@ export default function QiblaPage() {
   const live = heading != null;
   const h = heading ?? 0;
 
+  // نُدير البوصلة كاملةً ٩٠° ليكون هدف المحاذاة هو الجانب الأيمن من الشاشة
+  const RIGHT = 90;
+
   // الوردة تدور عكس اتجاه الجهاز ليبقى الشمال على الشمال الحقيقي
-  const roseRot = live ? -h : 0;
+  const roseRot = (live ? -h : 0) + RIGHT;
   // إبرة القبلة تبقى دائمًا بزاوية القبلة بالنسبة للوردة
-  const needleRot = bearing == null ? 0 : bearing - h;
+  const needleRot = (bearing == null ? 0 : bearing - h) + RIGHT;
 
   const delta = bearing == null || !live ? null : norm(bearing - h);
   const aligned = delta != null && (delta < 6 || delta > 354);
@@ -150,6 +153,13 @@ export default function QiblaPage() {
           />
           <div className="absolute left-1/2 top-2 -translate-x-1/2 text-3xl">🕋</div>
         </div>
+
+        {/* علامة الهدف على الجانب الأيمن — حاذِ الإبرة معها */}
+        <div
+          className={`absolute end-0 top-1/2 h-10 w-1.5 -translate-y-1/2 rounded-full transition-colors ${
+            aligned ? "bg-emerald-500" : "bg-[var(--border)]"
+          }`}
+        />
 
         <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-700" />
       </div>
